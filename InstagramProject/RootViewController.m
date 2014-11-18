@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <ParseUI/ParseUI.h>
+//#import "Profile.h"
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -32,6 +33,7 @@
     [super viewDidAppear:animated];
 
     if (![PFUser currentUser]) {
+
         //Create the log in view controller
         PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
         [logInViewController setDelegate:self];
@@ -72,6 +74,7 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
