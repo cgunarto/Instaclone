@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "Profile.h"
 #import "Photo.h"
+#import "Instaclone.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -28,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 }
 
 
@@ -35,9 +37,9 @@
 {
     [super viewDidAppear:animated];
 
-    //Looking for all the photos with self.profile in the user row
+    //Looking for all the photos with [Instaclone currentProfile] in the user row
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
-    [query whereKey:@"user" equalTo:self.profile];
+    [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
     [query orderByAscending:@"createdAt"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -52,14 +54,14 @@
         }
     }];
 
-    self.usernameLabel.text = self.profile.name;
+    self.usernameLabel.text = [Instaclone currentProfile].name;
 
-    NSData *imageData = self.profile.profilePhoto;
+    NSData *imageData = [Instaclone currentProfile].profilePhoto;
     UIImage *image = [UIImage imageWithData:imageData];
     self.profileImageView.image = image;
 
     PFQuery *photoQuery = [Photo query];
-    [query whereKey:@"user" equalTo:self.profile];
+    [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
     [query countObjectsInBackgroundWithBlock:^(int number, NSError *error)
     {
         self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
