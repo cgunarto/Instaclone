@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.h
+//  PhotoCollectionViewCell.h
 //  InstagramProject
 //
 //  Created by CHRISTINA GUNARTO on 11/17/14.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Profile;
 
-@interface ProfileViewController : UIViewController
-@property Profile *profile;
+@interface PhotoCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 
 @end

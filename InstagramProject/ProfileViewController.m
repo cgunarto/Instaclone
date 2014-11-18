@@ -7,31 +7,80 @@
 //
 
 #import "ProfileViewController.h"
+#import "PhotoCollectionViewCell.h"
+#import <Parse/Parse.h>
+#import "Profile.h"
+#import "Photo.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+
+@property NSArray *photos;
 
 @end
 
 @implementation ProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    //Looking for all the photos with self.profile in the user row
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query whereKey:@"user" equalTo:self.profile];
+    [query orderByAscending:@"createdAt"];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"%@", error.userInfo);
+        }
+        else
+        {
+            self.photos = objects;
+        }
+    }];
+
+    self.usernameLabel.text = self.profile.name;
+
+    NSData *imageData = self.profile.profilePhoto;
+    UIImage *image = [UIImage imageWithData:imageData];
+    self.profileImageView.image = image;
+
+    PFQuery *photoQuery = [Photo query];
+    [query whereKey:@"user" equalTo:self.profile];
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error)
+    {
+        self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
+    }];
 }
 
-/*
-#pragma mark - Navigation
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PhotoCollectionViewCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    PFObject *photo = self.photos[indexPath.item];
+    NSData *imageData = photo[@"image"];
+    UIImage *image = [UIImage imageWithData:imageData];
+    photoCell.cellImageView.image = image;
+
+    return photoCell;
 }
-*/
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photos.count;
+}
 
 @end
