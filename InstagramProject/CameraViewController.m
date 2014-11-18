@@ -33,7 +33,6 @@
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     imagePicker.allowsEditing = NO;
-    imagePicker.cameraOverlayView = nil;
     imagePicker.delegate = self;
 
     [self presentViewController:imagePicker animated:YES completion:nil];
@@ -72,23 +71,6 @@
     self.imageToUploadData = UIImageJPEGRepresentation(imageToUpload, 0.05f);
 }
 
-
-
-//- (void)refresh
-//{
-//    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
-//
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (error)
-//        {
-//            //
-//        }
-//        else
-//        {
-//            self.people = objects;
-//        }
-//    }];
-//}
 
 
 //MARK: Prepare for Segue to Upload Detail VC
