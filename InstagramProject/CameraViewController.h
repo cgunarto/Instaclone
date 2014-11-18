@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class Profile;
+
 @interface CameraViewController : UIViewController
+
+@property Profile *currentUser;
+
+
 
 @end

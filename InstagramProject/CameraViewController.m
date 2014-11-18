@@ -8,6 +8,7 @@
 
 #import "CameraViewController.h"
 #import <Parse/Parse.h>
+#import "Photo.h"
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate>
 
@@ -39,7 +40,7 @@
 {
     [super viewWillDisappear:animated];
 
-    // So that tapping on other taps will NOT trigger the showCamera method
+    // So that tapping on other tabs will NOT trigger the showCamera method
     self.tabBarController.delegate = nil;
 }
 
@@ -62,41 +63,35 @@
     [self showCamera];
 }
 
+//MARK: Image picker controller delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.imageView.image = chosenImage;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)uploadImage
 {
     if (self.imageView.image)
     {
+        Photo *photo = [Photo object];
+
         NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 0.05f);
+        photo.photoFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
+        photo.caption = self.captionTextView.text;
+        photo.user = self.currentUser;
 
-        PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
-
-        NSString *caption = self.captionTextView.text;
-
-        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error)
             {
-                NSLog(@"%@", error.userInfo);
+                NSLog(@"Error: %@", error.localizedDescription);
             }
             else
             {
-                PFObject *photo = [PFObject objectWithClassName:@"Photo"];
-                [photo setObject:imageFile forKey:@"Image"];
-                [photo setObject:caption forKey:@"Caption"];
-
-                PFUser *currentUser = [PFUser currentUser];
-                [photo setObject:currentUser forKey:@"currentUser"];
-
-                [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (error)
-                    {
-                        NSLog(@"%@", error.userInfo);
-                    }
-                    else
-                    {
-                        [self.navigationController popToRootViewControllerAnimated:YES];
-                        self.canTakePhoto = YES;
-                    }
-                }];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                self.canTakePhoto = YES;
             }
         }];
     }

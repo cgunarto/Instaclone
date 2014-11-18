@@ -40,6 +40,7 @@
 		4F67C2BE1A1ADB2700990970 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2B11A1ADB2700990970 /* AdSupport.framework */; };
 		4F67C2BF1A1ADB2700990970 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2B21A1ADB2700990970 /* Social.framework */; };
 		4F67C2C01A1ADB2700990970 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2B31A1ADB2700990970 /* Accounts.framework */; };
+		904AE7A71A1BED47006B313E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 904AE7A61A1BED47006B313E /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,8 @@
 		4F67C2B11A1ADB2700990970 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdSupport.framework; sourceTree = "<group>"; };
 		4F67C2B21A1ADB2700990970 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Social.framework; sourceTree = "<group>"; };
 		4F67C2B31A1ADB2700990970 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Accounts.framework; sourceTree = "<group>"; };
+		904AE7A51A1BED47006B313E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		904AE7A61A1BED47006B313E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +168,7 @@
 				4F67C2661A1AD3F100990970 /* RootViewController.m */,
 				4F67C2841A1AD4EC00990970 /* FavoritePhotosViewController.h */,
 				4F67C2851A1AD4EC00990970 /* FavoritePhotosViewController.m */,
-				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
-				4F67C2881A1AD4FF00990970 /* CameraViewController.m */,
+				904AE7A81A1BEF31006B313E /* Camera */,
 				4F67C28A1A1AD51100990970 /* SearchViewController.h */,
 				4F67C28B1A1AD51100990970 /* SearchViewController.m */,
 				4F67C28D1A1AD52100990970 /* ProfileViewController.h */,
@@ -238,6 +240,17 @@
 				4F67C2A31A1ADAEA00990970 /* Parse.framework */,
 			);
 			name = Framework;
+			sourceTree = "<group>";
+		};
+		904AE7A81A1BEF31006B313E /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
+				4F67C2881A1AD4FF00990970 /* CameraViewController.m */,
+				904AE7A51A1BED47006B313E /* Photo.h */,
+				904AE7A61A1BED47006B313E /* Photo.m */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +356,7 @@
 				4F67C2A11A1AD85E00990970 /* FollowersViewController.m in Sources */,
 				4F67C2921A1AD67D00990970 /* UserProfileViewController.m in Sources */,
 				4F67C2951A1AD6CC00990970 /* CommentDetailViewController.m in Sources */,
+				904AE7A71A1BED47006B313E /* Photo.m in Sources */,
 				4F67C2861A1AD4EC00990970 /* FavoritePhotosViewController.m in Sources */,
 				4F67C2611A1AD3F100990970 /* AppDelegate.m in Sources */,
 				4F67C28F1A1AD52100990970 /* ProfileViewController.m in Sources */,
@@ -560,6 +574,7 @@
 				4F67C2801A1AD3F100990970 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F67C2811A1AD3F100990970 /* Build configuration list for PBXNativeTarget "InstagramProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +583,7 @@
 				4F67C2831A1AD3F100990970 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
