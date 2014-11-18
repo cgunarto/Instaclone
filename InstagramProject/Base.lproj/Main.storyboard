@@ -268,14 +268,28 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="vKA-bb-AFi">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="vKA-bb-AFi" customClass="PhotoCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-PD-NKP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="pHa-PD-NKP" secondAttribute="trailing" constant="-8" id="6bL-7B-fW3"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="pHa-PD-NKP" secondAttribute="bottom" constant="-8" id="CDU-hK-DtQ"/>
+                                            <constraint firstItem="pHa-PD-NKP" firstAttribute="top" secondItem="vKA-bb-AFi" secondAttribute="topMargin" constant="-8" id="YR5-wO-Hid"/>
+                                            <constraint firstItem="pHa-PD-NKP" firstAttribute="leading" secondItem="vKA-bb-AFi" secondAttribute="leadingMargin" constant="-8" id="avc-Wj-o8E"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="cellImageView" destination="pHa-PD-NKP" id="TxJ-Cl-hAo"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

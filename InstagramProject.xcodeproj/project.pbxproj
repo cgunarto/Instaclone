@@ -25,8 +25,6 @@
 		4F67C29B1A1AD7E500990970 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F67C29A1A1AD7E500990970 /* PhotoDetailViewController.m */; };
 		4F67C29E1A1AD85000990970 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F67C29D1A1AD85000990970 /* EditProfileViewController.m */; };
 		4F67C2A11A1AD85E00990970 /* FollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F67C2A01A1AD85E00990970 /* FollowersViewController.m */; };
-		4F67C2A41A1ADAEA00990970 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A21A1ADAEA00990970 /* Bolts.framework */; };
-		4F67C2A51A1ADAEA00990970 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A31A1ADAEA00990970 /* Parse.framework */; };
 		4FEFB56F1A1B182900255736 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB56E1A1B182900255736 /* QuartzCore.framework */; };
 		4FEFB5711A1B184300255736 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5701A1B184300255736 /* CoreLocation.framework */; };
 		4FEFB5731A1B184D00255736 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5721A1B184D00255736 /* libz.dylib */; };
@@ -40,6 +38,7 @@
 		4FEFB5831A1B188D00255736 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5821A1B188D00255736 /* SystemConfiguration.framework */; };
 		4FEFB5851A1B189300255736 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5841A1B189300255736 /* StoreKit.framework */; };
 		4FEFB5871A1B189800255736 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5861A1B189800255736 /* Accounts.framework */; };
+		4FEFB5BF1A1B338200255736 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +114,8 @@
 		4FEFB5821A1B188D00255736 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4FEFB5841A1B189300255736 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4FEFB5861A1B189800255736 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		4FEFB5BD1A1B338200255736 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,8 +136,6 @@
 				4FEFB5731A1B184D00255736 /* libz.dylib in Frameworks */,
 				4FEFB5711A1B184300255736 /* CoreLocation.framework in Frameworks */,
 				4FEFB56F1A1B182900255736 /* QuartzCore.framework in Frameworks */,
-				4F67C2A51A1ADAEA00990970 /* Parse.framework in Frameworks */,
-				4F67C2A41A1ADAEA00990970 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +195,7 @@
 				4F67C29D1A1AD85000990970 /* EditProfileViewController.m */,
 				4F67C29F1A1AD85E00990970 /* FollowersViewController.h */,
 				4F67C2A01A1AD85E00990970 /* FollowersViewController.m */,
+				4FEFB5C01A1B338800255736 /* Model */,
 				4F67C2681A1AD3F100990970 /* Main.storyboard */,
 				4F67C26B1A1AD3F100990970 /* Images.xcassets */,
 				4F67C26D1A1AD3F100990970 /* LaunchScreen.xib */,
@@ -264,6 +264,15 @@
 				4F67C2A31A1ADAEA00990970 /* Parse.framework */,
 			);
 			name = Framework;
+			sourceTree = "<group>";
+		};
+		4FEFB5C01A1B338800255736 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4FEFB5BD1A1B338200255736 /* PhotoCollectionViewCell.h */,
+				4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +388,7 @@
 				4F67C2671A1AD3F100990970 /* RootViewController.m in Sources */,
 				4F67C25E1A1AD3F100990970 /* main.m in Sources */,
 				4F67C29B1A1AD7E500990970 /* PhotoDetailViewController.m in Sources */,
+				4FEFB5BF1A1B338200255736 /* PhotoCollectionViewCell.m in Sources */,
 				4F67C28C1A1AD51100990970 /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

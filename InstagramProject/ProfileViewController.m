@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "PhotoCollectionViewCell.h"
 #import <Parse/Parse.h>
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -32,11 +33,13 @@
 {
     [super viewDidAppear:animated];
     NSString *username = [[PFUser currentUser]objectForKey:@"username"];
-    NSString *objID = [[PFUser currentUser]objectForKey:@"objId"];
 
+    //Query for photos with the current user's objectID, sort by date created
+    //TODO: make parse attributes lower case, delete double username
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
-    [query whereKey:@"user" containsString:objID];
-    [query orderByAscending:@"updatedAt"];
+    PFUser *user = [PFUser currentUser];
+    [query whereKey:@"user" equalTo:user];
+    [query orderByAscending:@"createdAt"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
@@ -54,7 +57,14 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    PhotoCollectionViewCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
+
+    PFObject *photo = self.photos[indexPath.item];
+    NSData *imageData = photo[@"image"];
+    UIImage *image = [UIImage imageWithData:imageData];
+    photoCell.cellImageView.image = image;
+
+    return photoCell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
