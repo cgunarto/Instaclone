@@ -187,7 +187,8 @@
 				4F67C2661A1AD3F100990970 /* RootViewController.m */,
 				4F67C2841A1AD4EC00990970 /* FavoritePhotosViewController.h */,
 				4F67C2851A1AD4EC00990970 /* FavoritePhotosViewController.m */,
-				904AE7A81A1BEF31006B313E /* Camera */,
+				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
+				4F67C2881A1AD4FF00990970 /* CameraViewController.m */,
 				4F67C28A1A1AD51100990970 /* SearchViewController.h */,
 				4F67C28B1A1AD51100990970 /* SearchViewController.m */,
 				4F67C28D1A1AD52100990970 /* ProfileViewController.h */,
@@ -282,19 +283,10 @@
 				4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */,
 				4FEFB5C71A1BE7D800255736 /* Profile.h */,
 				4FEFB5C81A1BE7D800255736 /* Profile.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		904AE7A81A1BEF31006B313E /* Camera */ = {
-			isa = PBXGroup;
-			children = (
 				904AE7A91A1BFB23006B313E /* Photo.h */,
 				904AE7AA1A1BFB23006B313E /* Photo.m */,
-				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
-				4F67C2881A1AD4FF00990970 /* CameraViewController.m */,
 			);
-			name = Camera;
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
