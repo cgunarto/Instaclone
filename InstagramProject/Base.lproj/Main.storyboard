@@ -156,11 +156,72 @@
                     <view key="view" contentMode="scaleToFill" id="Zkt-vT-GQ3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dkC-pS-0ga">
+                                <rect key="frame" x="60" y="64" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="AYy-p1-O8Q"/>
+                                    <constraint firstAttribute="width" constant="200" id="lVp-tp-qAl"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVD-ME-dpq">
+                                <rect key="frame" x="124" y="268" width="72" height="30"/>
+                                <state key="normal" title="Edit Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="username" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9va-uU-8lG">
+                                <rect key="frame" x="60" y="336" width="200" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bE1-Bz-8yU" id="Etb-fF-ueA"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="name" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dUx-8C-ViK">
+                                <rect key="frame" x="60" y="374" width="200" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bE1-Bz-8yU" id="ud1-eu-53s"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="email" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pp3-HZ-ACX">
+                                <rect key="frame" x="60" y="412" width="200" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bE1-Bz-8yU" id="hRq-pt-i3u"/>
+                                </connections>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="dkC-pS-0ga" secondAttribute="centerX" id="DHp-aI-hr0"/>
+                            <constraint firstItem="dkC-pS-0ga" firstAttribute="top" secondItem="ljh-Ji-hiz" secondAttribute="bottom" id="mTb-19-yIQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="l2i-ba-89v"/>
+                    <connections>
+                        <outlet property="doneButton" destination="qml-XW-dAy" id="O0P-lJ-y07"/>
+                        <outlet property="editButton" destination="cgh-TT-YeG" id="87Z-5w-MIm"/>
+                        <outlet property="emailTextField" destination="Pp3-HZ-ACX" id="TNr-4z-iyR"/>
+                        <outlet property="nameTextField" destination="dUx-8C-ViK" id="rqQ-cc-m6q"/>
+                        <outlet property="profileImageView" destination="dkC-pS-0ga" id="3mk-bN-PeW"/>
+                        <outlet property="usernameTextfield" destination="9va-uU-8lG" id="df9-Qe-Ryd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phr-Dk-gRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="edit" id="cgh-TT-YeG">
+                    <connections>
+                        <action selector="onEditButtonPressed:" destination="bE1-Bz-8yU" id="Ttx-Au-D0x"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="done" id="qml-XW-dAy">
+                    <connections>
+                        <action selector="onDoneButtonPressed:" destination="bE1-Bz-8yU" id="bcD-Nz-Hg5"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1873" y="1810"/>
         </scene>

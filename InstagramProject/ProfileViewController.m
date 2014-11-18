@@ -9,6 +9,8 @@
 #import "ProfileViewController.h"
 #import "PhotoCollectionViewCell.h"
 #import <Parse/Parse.h>
+#import "Profile.h"
+#import "Photo.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -32,13 +34,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSString *username = [[PFUser currentUser]objectForKey:@"username"];
 
-    //Query for photos with the current user's objectID, sort by date created
-    //TODO: make parse attributes lower case, delete double username
+    //Looking for all the photos with self.profile in the user row
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
-    PFUser *user = [PFUser currentUser];
-    [query whereKey:@"user" equalTo:user];
+    [query whereKey:@"user" equalTo:self.profile];
     [query orderByAscending:@"createdAt"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -52,7 +51,19 @@
             self.photos = objects;
         }
     }];
-    self.usernameLabel.text = username;
+
+    self.usernameLabel.text = self.profile.name;
+
+    NSData *imageData = self.profile.profilePhoto;
+    UIImage *image = [UIImage imageWithData:imageData];
+    self.profileImageView.image = image;
+
+    PFQuery *photoQuery = [Photo query];
+    [query whereKey:@"user" equalTo:self.profile];
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error)
+    {
+        self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
+    }];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
