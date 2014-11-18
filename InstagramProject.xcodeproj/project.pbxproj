@@ -40,6 +40,9 @@
 		4FEFB5871A1B189800255736 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5861A1B189800255736 /* Accounts.framework */; };
 		4FEFB5BF1A1B338200255736 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */; };
 		4FEFB5C91A1BE7D800255736 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB5C81A1BE7D800255736 /* Profile.m */; };
+		904AE7AB1A1BFB23006B313E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 904AE7AA1A1BFB23006B313E /* Photo.m */; };
+		904AE7AC1A1BFB5C006B313E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A21A1ADAEA00990970 /* Bolts.framework */; };
+		904AE7AD1A1BFB5C006B313E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A31A1ADAEA00990970 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +122,8 @@
 		4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		4FEFB5C71A1BE7D800255736 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		4FEFB5C81A1BE7D800255736 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		904AE7A91A1BFB23006B313E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		904AE7AA1A1BFB23006B313E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +131,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				904AE7AC1A1BFB5C006B313E /* Bolts.framework in Frameworks */,
+				904AE7AD1A1BFB5C006B313E /* Parse.framework in Frameworks */,
 				4FEFB5871A1B189800255736 /* Accounts.framework in Frameworks */,
 				4FEFB5851A1B189300255736 /* StoreKit.framework in Frameworks */,
 				4FEFB5831A1B188D00255736 /* SystemConfiguration.framework in Frameworks */,
@@ -282,10 +289,10 @@
 		904AE7A81A1BEF31006B313E /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				904AE7A91A1BFB23006B313E /* Photo.h */,
+				904AE7AA1A1BFB23006B313E /* Photo.m */,
 				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
 				4F67C2881A1AD4FF00990970 /* CameraViewController.m */,
-				904AE7A51A1BED47006B313E /* Photo.h */,
-				904AE7A61A1BED47006B313E /* Photo.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -393,13 +400,13 @@
 				4F67C2A11A1AD85E00990970 /* FollowersViewController.m in Sources */,
 				4F67C2921A1AD67D00990970 /* UserProfileViewController.m in Sources */,
 				4F67C2951A1AD6CC00990970 /* CommentDetailViewController.m in Sources */,
-				904AE7A71A1BED47006B313E /* Photo.m in Sources */,
 				4F67C2861A1AD4EC00990970 /* FavoritePhotosViewController.m in Sources */,
 				4F67C2611A1AD3F100990970 /* AppDelegate.m in Sources */,
 				4FEFB5C91A1BE7D800255736 /* Profile.m in Sources */,
 				4F67C28F1A1AD52100990970 /* ProfileViewController.m in Sources */,
 				4F67C2641A1AD3F100990970 /* InstagramProject.xcdatamodeld in Sources */,
 				4F67C2891A1AD4FF00990970 /* CameraViewController.m in Sources */,
+				904AE7AB1A1BFB23006B313E /* Photo.m in Sources */,
 				4F67C2981A1AD78D00990970 /* UploadDetailViewController.m in Sources */,
 				4F67C29E1A1AD85000990970 /* EditProfileViewController.m in Sources */,
 				4F67C2671A1AD3F100990970 /* RootViewController.m in Sources */,
