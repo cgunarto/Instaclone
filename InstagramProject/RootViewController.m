@@ -11,7 +11,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <ParseUI/ParseUI.h>
-//#import "Profile.h"
+#import "Profile.h"
+#import "Instaclone.h"
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -74,6 +75,15 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
+    PFQuery *profileQuery = [Profile query];
+    [profileQuery whereKey:@"user" equalTo:user];
+    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object) {
+            Instaclone *clone = [Instaclone currentClone];
+            clone.profile = (Profile *)object;
+        }
+    }];
+
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -117,7 +127,7 @@
 //Sent the delegate when a PFUser is signed up
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
 {
-    //Dismiss PFSignUpViewController
+    //Dismiss PFSignUpViewController;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -43,6 +43,7 @@
 		87872D551A1C0B420075DEDA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87872D521A1C0B420075DEDA /* FacebookSDK.framework */; };
 		87872D561A1C0B420075DEDA /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87872D531A1C0B420075DEDA /* ParseFacebookUtils.framework */; };
 		87872D571A1C0B420075DEDA /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87872D541A1C0B420075DEDA /* ParseUI.framework */; };
+		87872D5A1A1C0D550075DEDA /* Instaclone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87872D591A1C0D550075DEDA /* Instaclone.m */; };
 		904AE7AB1A1BFB23006B313E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 904AE7AA1A1BFB23006B313E /* Photo.m */; };
 		904AE7AC1A1BFB5C006B313E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A21A1ADAEA00990970 /* Bolts.framework */; };
 		904AE7AD1A1BFB5C006B313E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A31A1ADAEA00990970 /* Parse.framework */; };
@@ -128,6 +129,8 @@
 		87872D521A1C0B420075DEDA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		87872D531A1C0B420075DEDA /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		87872D541A1C0B420075DEDA /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		87872D581A1C0D550075DEDA /* Instaclone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instaclone.h; sourceTree = "<group>"; };
+		87872D591A1C0D550075DEDA /* Instaclone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instaclone.m; sourceTree = "<group>"; };
 		904AE7A91A1BFB23006B313E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		904AE7AA1A1BFB23006B313E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,6 +297,8 @@
 				4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */,
 				4FEFB5C71A1BE7D800255736 /* Profile.h */,
 				4FEFB5C81A1BE7D800255736 /* Profile.m */,
+				87872D581A1C0D550075DEDA /* Instaclone.h */,
+				87872D591A1C0D550075DEDA /* Instaclone.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				4F67C2951A1AD6CC00990970 /* CommentDetailViewController.m in Sources */,
 				4F67C2861A1AD4EC00990970 /* FavoritePhotosViewController.m in Sources */,
 				4F67C2611A1AD3F100990970 /* AppDelegate.m in Sources */,
+				87872D5A1A1C0D550075DEDA /* Instaclone.m in Sources */,
 				4FEFB5C91A1BE7D800255736 /* Profile.m in Sources */,
 				4F67C28F1A1AD52100990970 /* ProfileViewController.m in Sources */,
 				4F67C2641A1AD3F100990970 /* InstagramProject.xcdatamodeld in Sources */,

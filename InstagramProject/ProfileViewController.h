@@ -10,6 +10,5 @@
 @class Profile;
 
 @interface ProfileViewController : UIViewController
-@property Profile *profile;
 
 @end
