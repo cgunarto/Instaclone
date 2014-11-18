@@ -7,31 +7,59 @@
 //
 
 #import "ProfileViewController.h"
+#import <Parse/Parse.h>
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *postLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+
+@property NSArray *photos;
 
 @end
 
 @implementation ProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSString *username = [[PFUser currentUser]objectForKey:@"username"];
+    NSString *objID = [[PFUser currentUser]objectForKey:@"objId"];
+
+    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+    [query whereKey:@"user" containsString:objID];
+    [query orderByAscending:@"updatedAt"];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"%@", error.userInfo);
+        }
+        else
+        {
+            self.photos = objects;
+        }
+    }];
+    self.usernameLabel.text = username;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
 }
-*/
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photos.count;
+}
 
 @end
