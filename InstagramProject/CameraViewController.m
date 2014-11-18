@@ -9,10 +9,11 @@
 #import "CameraViewController.h"
 #import "UploadDetailViewController.h"
 #import "UIImage+Resize.h"
+#import <Parse/Parse.h>
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property UIImage *imageToUpload;
+@property NSData *imageToUploadData;
 
 @end
 
@@ -27,18 +28,23 @@
 
 - (void)showCameraController
 {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO)
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == YES)
     {
-        // Camera is not available
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.allowsEditing = NO;
+    imagePicker.cameraOverlayView = nil;
+    imagePicker.delegate = self;
+
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+
+    else
+
+    // if camera is not available
+    {
         return;
     }
-    UIImagePickerController *camera = [[UIImagePickerController alloc] init];
-    camera.sourceType = UIImagePickerControllerSourceTypeCamera;
-    camera.allowsEditing = NO;
-    camera.cameraOverlayView = nil;
-    camera.delegate = self;
-
-    [self presentViewController:camera animated:YES completion:nil];
 }
 
 //MARK: UIImagePickerControllerDelegate
@@ -54,14 +60,35 @@
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil);
 
-    self.imageToUpload = [originalImage thumbnailImage:750 transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+    UIImage *imageToUpload = [originalImage thumbnailImage:750 transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
 
     // segue to UPLOAD PHOTO VC
     [self performSegueWithIdentifier:@"toUploadDetailVCSegue" sender:self];
 
     // If the user returns to this VC from UPLOAD PHOTO VC - this vc will be empty.
     [self dismissViewControllerAnimated:NO completion:nil];
+
+    // Upload image
+    self.imageToUploadData = UIImageJPEGRepresentation(imageToUpload, 0.05f);
 }
+
+
+
+//- (void)refresh
+//{
+//    PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
+//
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (error)
+//        {
+//            //
+//        }
+//        else
+//        {
+//            self.people = objects;
+//        }
+//    }];
+//}
 
 
 //MARK: Prepare for Segue to Upload Detail VC
@@ -71,7 +98,7 @@
     if ([segue.identifier isEqualToString:@"toUploadDetailVCSegue"])
     {
         UploadDetailViewController *uploadPhotoVC = segue.destinationViewController;
-        uploadPhotoVC.imageToUpload = self.imageToUpload;
+        uploadPhotoVC.imageToUploadData = self.imageToUploadData;
     }
 }
 

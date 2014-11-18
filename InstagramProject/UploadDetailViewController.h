@@ -10,6 +10,6 @@
 
 @interface UploadDetailViewController : UIViewController
 
-@property UIImage *imageToUpload;
+@property NSData *imageToUploadData;
 
 @end
