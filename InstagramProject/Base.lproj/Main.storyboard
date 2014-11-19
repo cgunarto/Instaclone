@@ -66,6 +66,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="FdU-5F-wIf"/>
                     <connections>
+                        <outlet property="collectionView" destination="LAc-3E-6VO" id="wug-wd-E2p"/>
                         <segue destination="wIN-QS-Wv1" kind="push" identifier="segueToMainFeed" id="Hjf-V1-e3n"/>
                         <segue destination="Mdj-VH-2Z7" kind="push" identifier="segueToCommentDetail" id="0yc-wD-vmc"/>
                     </connections>

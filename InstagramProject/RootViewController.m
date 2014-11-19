@@ -15,6 +15,7 @@
 #import "Instaclone.h"
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
