@@ -14,7 +14,8 @@
 #import "Profile.h"
 #import "Instaclone.h"
 
-@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -77,9 +78,10 @@
 {
     PFQuery *profileQuery = [Profile query];
     [profileQuery whereKey:@"user" equalTo:user];
+    Instaclone *clone = [Instaclone currentClone];
+
     [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (object) {
-            Instaclone *clone = [Instaclone currentClone];
             clone.profile = (Profile *)object;
         }
     }];
@@ -127,6 +129,22 @@
 //Sent the delegate when a PFUser is signed up
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
 {
+    Profile *profile = [Profile object];
+    profile.email = user.email;
+    profile.username = user.username;
+    profile.user = user;
+
+    Instaclone *clone = [Instaclone currentClone];
+
+    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        //TODO: Set error message later
+        clone.profile = profile;
+
+    }];
+
+
+
+
     //Dismiss PFSignUpViewController;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -143,7 +161,15 @@
     NSLog(@"User dismissed the signupViewController");
 }
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 0;
+}
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
 
 
 @end

@@ -1,21 +1,19 @@
 //
-//  PhotoDetailViewController.m
+//  FollowingViewController.m
 //  InstagramProject
 //
-//  Created by CHRISTINA GUNARTO on 11/17/14.
+//  Created by CHRISTINA GUNARTO on 11/18/14.
 //  Copyright (c) 2014 Christina Gunarto. All rights reserved.
 //
 
-#import "PhotoDetailViewController.h"
+#import "FollowingViewController.h"
 
-@interface PhotoDetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@interface FollowingViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 
 @end
 
-@implementation PhotoDetailViewController
+@implementation FollowingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

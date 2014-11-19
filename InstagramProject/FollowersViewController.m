@@ -9,6 +9,7 @@
 #import "FollowersViewController.h"
 
 @interface FollowersViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
