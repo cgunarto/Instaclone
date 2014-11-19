@@ -40,11 +40,11 @@
 		4FEFB5871A1B189800255736 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEFB5861A1B189800255736 /* Accounts.framework */; };
 		4FEFB5BF1A1B338200255736 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */; };
 		4FEFB5C91A1BE7D800255736 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB5C81A1BE7D800255736 /* Profile.m */; };
+		4FEFB5D31A1C187900255736 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFB5D21A1C187900255736 /* Photo.m */; };
 		87872D551A1C0B420075DEDA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87872D521A1C0B420075DEDA /* FacebookSDK.framework */; };
 		87872D561A1C0B420075DEDA /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87872D531A1C0B420075DEDA /* ParseFacebookUtils.framework */; };
 		87872D571A1C0B420075DEDA /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87872D541A1C0B420075DEDA /* ParseUI.framework */; };
 		87872D5A1A1C0D550075DEDA /* Instaclone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87872D591A1C0D550075DEDA /* Instaclone.m */; };
-		904AE7AB1A1BFB23006B313E /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 904AE7AA1A1BFB23006B313E /* Photo.m */; };
 		904AE7AC1A1BFB5C006B313E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A21A1ADAEA00990970 /* Bolts.framework */; };
 		904AE7AD1A1BFB5C006B313E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A31A1ADAEA00990970 /* Parse.framework */; };
 /* End PBXBuildFile section */
@@ -126,13 +126,14 @@
 		4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		4FEFB5C71A1BE7D800255736 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		4FEFB5C81A1BE7D800255736 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		4FEFB5D11A1C187900255736 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		4FEFB5D21A1C187900255736 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		4FEFB5D41A1C18C100255736 /* Photo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = InstagramProject/Photo.m; sourceTree = "<group>"; };
 		87872D521A1C0B420075DEDA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		87872D531A1C0B420075DEDA /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		87872D541A1C0B420075DEDA /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		87872D581A1C0D550075DEDA /* Instaclone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instaclone.h; sourceTree = "<group>"; };
 		87872D591A1C0D550075DEDA /* Instaclone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instaclone.m; sourceTree = "<group>"; };
-		904AE7A91A1BFB23006B313E /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		904AE7AA1A1BFB23006B313E /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +175,7 @@
 		4F67C24F1A1AD3F100990970 = {
 			isa = PBXGroup;
 			children = (
+				4FEFB5D41A1C18C100255736 /* Photo.m */,
 				87872D521A1C0B420075DEDA /* FacebookSDK.framework */,
 				87872D531A1C0B420075DEDA /* ParseFacebookUtils.framework */,
 				87872D541A1C0B420075DEDA /* ParseUI.framework */,
@@ -294,21 +296,14 @@
 		4FEFB5C01A1B338800255736 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4FEFB5D11A1C187900255736 /* Photo.h */,
+				4FEFB5D21A1C187900255736 /* Photo.m */,
 				4FEFB5BD1A1B338200255736 /* PhotoCollectionViewCell.h */,
 				4FEFB5BE1A1B338200255736 /* PhotoCollectionViewCell.m */,
 				4FEFB5C71A1BE7D800255736 /* Profile.h */,
 				4FEFB5C81A1BE7D800255736 /* Profile.m */,
 				87872D581A1C0D550075DEDA /* Instaclone.h */,
 				87872D591A1C0D550075DEDA /* Instaclone.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		904AE7A81A1BEF31006B313E /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				904AE7A91A1BFB23006B313E /* Photo.h */,
-				904AE7AA1A1BFB23006B313E /* Photo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -413,6 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FEFB5D31A1C187900255736 /* Photo.m in Sources */,
 				4F67C2A11A1AD85E00990970 /* FollowersViewController.m in Sources */,
 				4F67C2921A1AD67D00990970 /* UserProfileViewController.m in Sources */,
 				4F67C2951A1AD6CC00990970 /* CommentDetailViewController.m in Sources */,
@@ -423,7 +419,6 @@
 				4F67C28F1A1AD52100990970 /* ProfileViewController.m in Sources */,
 				4F67C2641A1AD3F100990970 /* InstagramProject.xcdatamodeld in Sources */,
 				4F67C2891A1AD4FF00990970 /* CameraViewController.m in Sources */,
-				904AE7AB1A1BFB23006B313E /* Photo.m in Sources */,
 				4F67C2981A1AD78D00990970 /* UploadDetailViewController.m in Sources */,
 				4F67C29E1A1AD85000990970 /* EditProfileViewController.m in Sources */,
 				4F67C2671A1AD3F100990970 /* RootViewController.m in Sources */,
