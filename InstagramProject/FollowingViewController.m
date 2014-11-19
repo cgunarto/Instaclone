@@ -1,19 +1,19 @@
 //
-//  FollowersViewController.m
+//  FollowingViewController.m
 //  InstagramProject
 //
-//  Created by CHRISTINA GUNARTO on 11/17/14.
+//  Created by CHRISTINA GUNARTO on 11/18/14.
 //  Copyright (c) 2014 Christina Gunarto. All rights reserved.
 //
 
-#import "FollowersViewController.h"
+#import "FollowingViewController.h"
 
-@interface FollowersViewController ()
+@interface FollowingViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation FollowersViewController
+@implementation FollowingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
