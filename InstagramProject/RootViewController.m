@@ -78,9 +78,10 @@
 {
     PFQuery *profileQuery = [Profile query];
     [profileQuery whereKey:@"user" equalTo:user];
+    Instaclone *clone = [Instaclone currentClone];
+
     [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (object) {
-            Instaclone *clone = [Instaclone currentClone];
             clone.profile = (Profile *)object;
         }
     }];
@@ -133,9 +134,10 @@
     profile.username = user.username;
     profile.user = user;
 
+    Instaclone *clone = [Instaclone currentClone];
+
     [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         //TODO: Set error message later
-        Instaclone *clone = [Instaclone currentClone];
         clone.profile = profile;
 
     }];
