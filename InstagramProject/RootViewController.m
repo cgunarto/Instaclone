@@ -17,6 +17,7 @@
 #import "MainfeedTableViewCell.h"
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property NSArray *arrayOfPhotoObjects;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;

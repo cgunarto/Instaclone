@@ -26,7 +26,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ytk-pV-UcO" customClass="MainFeedCollectionViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Ytk-pV-UcO" customClass="MainFeedCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -66,6 +66,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="FdU-5F-wIf"/>
                     <connections>
+                        <outlet property="collectionView" destination="LAc-3E-6VO" id="wug-wd-E2p"/>
                         <segue destination="wIN-QS-Wv1" kind="push" identifier="segueToMainFeed" id="Hjf-V1-e3n"/>
                         <segue destination="Mdj-VH-2Z7" kind="push" identifier="segueToCommentDetail" id="0yc-wD-vmc"/>
                     </connections>
