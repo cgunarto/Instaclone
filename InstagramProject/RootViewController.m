@@ -14,7 +14,7 @@
 #import "Profile.h"
 #import "Instaclone.h"
 
-@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
 
@@ -158,7 +158,15 @@
     NSLog(@"User dismissed the signupViewController");
 }
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 0;
+}
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
 
 
 @end
