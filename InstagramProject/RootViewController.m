@@ -127,19 +127,19 @@
 //Sent the delegate when a PFUser is signed up
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
 {
+    Profile *profile = [Profile object];
+    profile.email = user.email;
+    profile.username = user.username;
+    profile.user = user;
 
-    PFQuery *profileQuery = [Profile query];
-    [profileQuery whereKey:@"user" equalTo:user];
-    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (object) {
-            Instaclone *clone = [Instaclone currentClone];
-            clone.profile = (Profile *)object;
+    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        //TODO: Set error message later
+        Instaclone *clone = [Instaclone currentClone];
+        clone.profile = profile;
 
-        }
     }];
 
 
-    NSString *name = 
 
 
     //Dismiss PFSignUpViewController;
