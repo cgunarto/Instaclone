@@ -8,7 +8,9 @@
 
 #import "PhotoDetailViewController.h"
 
-@interface PhotoDetailViewController ()
+@interface PhotoDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -16,22 +18,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // need custom tableview cell here
+
+    UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"cell"];
+
+    //UserName
+    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
+//        cell.usernameLabel.text = username;
+    }];
+
+    //Image
+    [self.selectedPhoto standardImageWithCompletionBlock:^(UIImage *photo) {
+//        cell.photo.image = photo;
+    }];
+
+    //PhotoCaption
+//    cell.captionTextView.text = self.selectedPhoto.caption;
+
+    //TimeLabel
+    cell.textLabel.text = self.selectedPhoto.dateString;
+
+    return cell;
+}
 
 @end
