@@ -7,31 +7,145 @@
 //
 
 #import "FavoritePhotosViewController.h"
+#import "Instaclone.h"
+#import "FavPhotoCollectionViewCell.h"
+#import "Photo.h"
+#import <Social/Social.h>
 
-@interface FavoritePhotosViewController ()
+@interface FavoritePhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@property NSArray *photos;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation FavoritePhotosViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    PFQuery *query = [Photo query];
+    NSArray *userWhoFavorited = @[[Instaclone currentProfile]];
+    [query whereKey:@"userWhoFavorited" containsAllObjectsInArray:userWhoFavorited];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        self.photos = objects;
+        [self.collectionView reloadData];
+    }];
 }
 
-/*
-#pragma mark - Navigation
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    FavPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favoriteCell" forIndexPath:indexPath];
+    Photo *photo = self.photos[indexPath.item];
+    
+    [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        if (!error)
+        {
+            UIImage *image = [UIImage imageWithData:data];
+            cell.imageView.image = image;
+        }
+    }];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    return cell;
 }
-*/
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photos.count;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return CGSizeMake(width, width);
+}
+
+//- (IBAction)onPhotoLongPressed:(UILongPressGestureRecognizer *)gesture
+//{
+//    CGPoint selectedPoint = [gesture locationInView:self.collectionView];
+//    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:selectedPoint];
+//
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE" message:@"Delete Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete"
+//                                                           style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction *action)
+//                                   {
+//                                       Photo *photo = self.photos[selectedIndexPath.item];
+//                                       //remove user from photo's userWhoFavorited array.
+//                                    
+//
+//
+//                                       [self.collectionView reloadData];
+//                                       [alert dismissViewControllerAnimated:YES completion:nil];
+//                                   }];
+//
+//    //Add Twitter send
+//    UIAlertAction* tweetButton = [UIAlertAction actionWithTitle:@"Tweet it!"
+//                                                          style:UIAlertActionStyleDefault
+//                                                        handler:^(UIAlertAction * action)
+//                                  {
+//                                      SLComposeViewController *tweetSheet = [SLComposeViewController
+//                                                                             composeViewControllerForServiceType:SLServiceTypeTwitter];
+//                                      [tweetSheet setInitialText:@"I love this photo!"];
+//                                      [tweetSheet addImage:[UIImage imageWithData:self.favoritedPhotosArray[selectedIndexPath.item]]];
+//
+//                                      [self presentViewController:tweetSheet animated:YES completion:nil];
+//
+//                                      [alert dismissViewControllerAnimated:YES completion:nil];
+//
+//                                  }];
+//
+//    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+//                                                           style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction * action)
+//                                   {
+//                                       [alert dismissViewControllerAnimated:YES completion:nil];
+//                                       
+//                                   }];
+//    
+//    
+//    [alert addAction:deleteButton];
+//    [alert addAction:tweetButton];
+//    [alert addAction:cancelButton];
+//    [self presentViewController:alert
+//                       animated:YES
+//                     completion:nil];
+//
+//}
+
+
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

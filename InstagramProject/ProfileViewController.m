@@ -29,9 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
-
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -56,13 +54,17 @@
 
     self.usernameLabel.text = [Instaclone currentProfile].name;
 
-    NSData *imageData = [Instaclone currentProfile].profilePhoto;
-    UIImage *image = [UIImage imageWithData:imageData];
-    self.profileImageView.image = image;
+    [[Instaclone currentProfile].profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error)
+        {
+            UIImage *image = [UIImage imageWithData:data];
+            self.profileImageView.image = image;
+        }
+    }];
 
     PFQuery *photoQuery = [Photo query];
-    [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error)
+    [photoQuery whereKey:@"user" equalTo:[Instaclone currentProfile]];
+    [photoQuery countObjectsInBackgroundWithBlock:^(int number, NSError *error)
     {
         self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
     }];
