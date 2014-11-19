@@ -40,6 +40,15 @@
     self.nameTextField.text = [Instaclone currentProfile].name;
     self.usernameTextfield.text = [Instaclone currentProfile].username;
     self.emailTextField.text = [Instaclone currentProfile].email;
+
+    [[Instaclone currentProfile].profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        if (!error)
+        {
+            UIImage *image = [UIImage imageWithData:data];
+            self.profileImageView.image = image;
+        }
+    }];
 }
 
 - (void)disableAllTextFieldEditing
@@ -108,7 +117,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 
     NSData *imageData = UIImagePNGRepresentation(image);
-    [Instaclone currentProfile].profilePhoto = imageData;
+    [Instaclone currentProfile].profilePhoto = [PFFile fileWithName:@"profile.jpg" data:imageData];
 
     [[Instaclone currentProfile] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
     {
@@ -116,7 +125,6 @@
     }];
 
     self.imagePickerController = nil;
-
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

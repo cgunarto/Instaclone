@@ -96,6 +96,10 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="er9-lW-fUD">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                                    <gestureRecognizers/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="pqs-hp-eha" appends="YES" id="bkn-S5-6jj"/>
+                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -125,6 +129,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lE8-hR-jNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="pqs-hp-eha">
+                    <connections>
+                        <action selector="onPhotoLongPressed:" destination="bfo-T3-IT0" id="XQ0-yU-RU3"/>
+                        <outlet property="delegate" destination="bfo-T3-IT0" id="6nH-r0-XVM"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="469" y="1097"/>
         </scene>
