@@ -8,7 +8,10 @@
 
 #import "PhotoDetailViewController.h"
 
-@interface PhotoDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface PhotoDetailViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
