@@ -57,8 +57,10 @@
     PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"searchCell" forIndexPath:indexPath];
     Photo *photo = self.photosArray[indexPath.item];
 
-//    cell.cellImageView.image =
-    //TODO:set image view in cell as the photo image view
+    [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        cell.cellImageView.image = [UIImage imageWithData:data];
+    }];
 
     return cell;
 }
@@ -77,7 +79,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Photo *)photo
 {
     PhotoDetailViewController *photoDetailVC = segue.destinationViewController;
-    //TODO:pass chosen photo object to PhotoDetailVC
+//    photoDetailVC.selectedPhoto = photo;
 }
 
 
