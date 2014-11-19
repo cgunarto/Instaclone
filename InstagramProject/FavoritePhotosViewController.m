@@ -10,7 +10,7 @@
 #import "Instaclone.h"
 #import "Photo.h"
 
-@interface FavoritePhotosViewController ()
+@interface FavoritePhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property NSArray *photos;
 
 @end
@@ -22,7 +22,17 @@
     [super viewDidLoad];
 }
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favoriteCell" forIndexPath:indexPath];
 
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photos.count;
+}
 
 
 
