@@ -8,10 +8,12 @@
 
 #import "FavoritePhotosViewController.h"
 #import "Instaclone.h"
+#import "FavPhotoCollectionViewCell.h"
 #import "Photo.h"
 
 @interface FavoritePhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property NSArray *photos;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -27,16 +29,19 @@
     [super viewDidAppear:animated];
 
     PFQuery *query = [Photo query];
-    NSArray *userWhoFavorited = [Instaclone ]
-    [query whereKey:@"userWhoFavorited" containsAllObjectsInArray:(NSArray *)
-    
-
+    NSArray *userWhoFavorited = @[[Instaclone currentProfile]];
+    [query whereKey:@"userWhoFavorited" containsAllObjectsInArray:userWhoFavorited];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
+        self.photos = objects;
+        [self.collectionView reloadData];
+    }];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favoriteCell" forIndexPath:indexPath];
-
+    FavPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favoriteCell" forIndexPath:indexPath];
+    cell.imageView.image = self.photos[indexPath.item];
     return cell;
 }
 

@@ -78,7 +78,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6tR-LX-xMg">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6tR-LX-xMg">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sDO-D4-kif">
                                     <size key="itemSize" width="300" height="300"/>
@@ -101,7 +101,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="imageView" destination="er9-lW-fUD" id="cVv-xM-RxJ"/>
+                                            <outlet property="imageView" destination="er9-lW-fUD" id="WG5-ES-YC8"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -112,8 +112,17 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6tR-LX-xMg" firstAttribute="bottom" secondItem="oR7-rt-Fi0" secondAttribute="bottomMargin" id="1KV-Au-AF8"/>
+                            <constraint firstItem="6tR-LX-xMg" firstAttribute="leading" secondItem="oR7-rt-Fi0" secondAttribute="leadingMargin" constant="-16" id="XQY-Xa-cWx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6tR-LX-xMg" secondAttribute="trailing" constant="-16" id="Zbh-eZ-ghE"/>
+                            <constraint firstItem="6tR-LX-xMg" firstAttribute="top" secondItem="oR7-rt-Fi0" secondAttribute="topMargin" id="eW2-6D-pwy"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="NiM-bJ-L0D"/>
+                    <connections>
+                        <outlet property="collectionView" destination="6tR-LX-xMg" id="8OI-e9-9Yr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lE8-hR-jNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
