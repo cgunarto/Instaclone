@@ -30,7 +30,6 @@
 {
     [super viewDidLoad];
 
-
 }
 
 
@@ -53,7 +52,8 @@
     }];
 
     //UserName
-    [photoPost usernameWithCompletionBlock:^(NSString *username) {
+    [photoPost usernameWithCompletionBlock:^(NSString *username)
+    {
         cell.userNameLabel.text = username;
     }];
 
