@@ -7,31 +7,78 @@
 //
 
 #import "SearchViewController.h"
+#import "Photo.h"
+#import "PhotoCollectionViewCell.h"
+#import "PhotoDetailViewController.h"
 
-@interface SearchViewController ()
+@interface SearchViewController ()<UICollectionViewDataSource, UICollectionViewDataSource, UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) NSArray *photosArray;
 
 @end
 
 @implementation SearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//Query all the photos with some tag associated to it
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString *textResult = searchBar.text;
+    PFQuery *queryTaggedPhotos =[Photo query];
+
+    //TODO:can you search through an array with ContainsString? May need to use string StringWithFormat
+    [queryTaggedPhotos whereKey:@"tags" containsString:textResult];
+
+    [queryTaggedPhotos findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        else
+        {
+            self.photosArray = objects;
+            [self.collectionView reloadData];
+        }
+
+    }];
+
+    [self resignFirstResponder];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark Collection View Cell Delegate Method
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"searchCell" forIndexPath:indexPath];
+    Photo *photo = self.photosArray[indexPath.item];
+
+//    cell.cellImageView.image =
+    //TODO:set image view in cell as the photo image view
+
+    return cell;
 }
-*/
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photosArray.count;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Photo *photo = self.photosArray[indexPath.item];
+    [self performSegueWithIdentifier:@"segueToPhotoDetail" sender:photo];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Photo *)photo
+{
+    PhotoDetailViewController *photoDetailVC = segue.destinationViewController;
+    //TODO:pass chosen photo object to PhotoDetailVC
+}
+
 
 @end

@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) PFUser *user;
 @property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSData *profilePhoto;
+@property (nonatomic, strong) PFFile *profilePhoto;
 @property (nonatomic, strong) NSArray *followers;
 @property (nonatomic, strong) NSArray *following;
 
