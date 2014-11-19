@@ -13,8 +13,14 @@
 #import <ParseUI/ParseUI.h>
 #import "Profile.h"
 #import "Instaclone.h"
+#import "Photo.h"
+#import "MainfeedTableViewCell.h"
 
-@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@property NSArray *arrayOfPhotoObjects;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
 
 @end
 
@@ -24,9 +30,41 @@
 {
     [super viewDidLoad];
 
-    //FBLoginView *loginView = [[FBLoginView alloc] init];
-    //loginView.center = self.view.center;
-    //[self.view addSubview:loginView];
+
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.arrayOfPhotoObjects.count;
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+
+    // need to retrieve photos...
+    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
+    {
+        cell.photo.image = photo;
+    }];
+
+    //UserName
+    [photoPost usernameWithCompletionBlock:^(NSString *username) {
+        cell.userNameLabel.text = username;
+    }];
+
+    //PhotoCaption
+    cell.photoCaptionTextView.text = photoPost.caption;
+
+    //TimeLabel
+    cell.dateLabel.text = photoPost.dateString;
+
+    return cell;
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -53,6 +91,37 @@
         [self presentViewController:logInViewController animated:YES completion:nil];
 
     }
+
+    // Go to Mainfeed VC
+
+    else
+    {
+        [self downloadAllImages];
+    }
+
+}
+
+- (IBAction)onLogoutButtonPressed:(id)sender
+{
+    [PFUser logOut];
+}
+
+
+- (void)downloadAllImages
+{
+    PFQuery *query = [PFQuery queryWithClassName:[Photo parseClassName]];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"Error: %@",error);
+        }else
+        {
+            self.arrayOfPhotoObjects = objects;
+            [self.tableView reloadData];
+        }
+    }];
 
 }
 

@@ -16,4 +16,12 @@
 @property PFFile *photoFile;
 @property NSString *caption;
 
+// added properties
+
+@property NSArray *userPhotos;
+@property NSString *dateString;
+
+-(void)standardImageWithCompletionBlock:(void(^)(UIImage *))completionBlock;
+-(void)usernameWithCompletionBlock:(void(^)(NSString *username))completionBlock;
+
 @end
