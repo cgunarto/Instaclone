@@ -9,6 +9,7 @@
 #import "CameraViewController.h"
 #import <Parse/Parse.h>
 #import "Photo.h"
+#import "Instaclone.h"
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate>
 
@@ -50,6 +51,7 @@
     {
         UIImagePickerController *camera = [[UIImagePickerController alloc] init];
         camera.delegate = self;
+        camera.allowsEditing = YES;
         camera.sourceType = UIImagePickerControllerSourceTypeCamera;
 
         [self presentViewController:camera animated:YES completion:nil];
@@ -81,7 +83,7 @@
         NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 0.05f);
         photo.photoFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
         photo.caption = self.captionTextView.text;
-        photo.user = self.currentUser;
+        photo.user = [Instaclone currentProfile];
 
         [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error)
