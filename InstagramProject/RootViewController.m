@@ -16,7 +16,7 @@
 #import "Photo.h"
 #import "MainfeedTableViewCell.h"
 
-@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property NSArray *arrayOfPhotoObjects;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -227,7 +227,15 @@
     NSLog(@"User dismissed the signupViewController");
 }
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 0;
+}
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
 
 
 @end
