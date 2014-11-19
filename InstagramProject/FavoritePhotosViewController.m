@@ -22,6 +22,17 @@
     [super viewDidLoad];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    PFQuery *query = [Photo query];
+    NSArray *userWhoFavorited = [Instaclone ]
+    [query whereKey:@"userWhoFavorited" containsAllObjectsInArray:(NSArray *)
+    
+
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"favoriteCell" forIndexPath:indexPath];
