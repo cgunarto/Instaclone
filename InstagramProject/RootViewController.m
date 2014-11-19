@@ -14,13 +14,13 @@
 #import "Profile.h"
 #import "Instaclone.h"
 #import "Photo.h"
-#import "MainfeedTableViewCell.h"
+#import "MainFeedCollectionViewCell.h"
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property NSArray *arrayOfPhotoObjects;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+//@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 
 @end
@@ -34,39 +34,68 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.arrayOfPhotoObjects.count;
 }
 
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
 
     // need to retrieve photos...
     [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
-    {
-        cell.photo.image = photo;
-    }];
+     {
+         cell.imageView.image = photo;
+     }];
 
-    //UserName
-    [photoPost usernameWithCompletionBlock:^(NSString *username)
-    {
-        cell.userNameLabel.text = username;
-    }];
-
-    //PhotoCaption
-    cell.photoCaptionTextView.text = photoPost.caption;
-
-    //TimeLabel
-    cell.dateLabel.text = photoPost.dateString;
+//    //UserName
+//    [photoPost usernameWithCompletionBlock:^(NSString *username)
+//     {
+//         cell.userNameLabel.text = username;
+//     }];
+//
+//    //PhotoCaption
+//    cell.photoCaptionTextView.text = photoPost.caption;
+//
+//    //TimeLabel
+//    cell.dateLabel.text = photoPost.dateString;
 
     return cell;
-
 }
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.arrayOfPhotoObjects.count;
+//}
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+//
+//    // need to retrieve photos...
+//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
+//    {
+//        cell.photo.image = photo;
+//    }];
+//
+//    //UserName
+//    [photoPost usernameWithCompletionBlock:^(NSString *username)
+//    {
+//        cell.userNameLabel.text = username;
+//    }];
+//
+//    //PhotoCaption
+//    cell.photoCaptionTextView.text = photoPost.caption;
+//
+//    //TimeLabel
+//    cell.dateLabel.text = photoPost.dateString;
+//
+//    return cell;
+//
+//}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -120,7 +149,7 @@
         }else
         {
             self.arrayOfPhotoObjects = objects;
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
         }
     }];
 
@@ -210,8 +239,6 @@
     }];
 
 
-
-
     //Dismiss PFSignUpViewController;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -228,15 +255,7 @@
     NSLog(@"User dismissed the signupViewController");
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 0;
-}
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return nil;
-}
 
 
 @end
