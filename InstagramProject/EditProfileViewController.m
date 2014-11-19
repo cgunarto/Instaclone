@@ -8,15 +8,21 @@
 
 #import "EditProfileViewController.h"
 #import "Profile.h"
+#import "Instaclone.h"
 
-@interface EditProfileViewController () <UITextFieldDelegate>
-@property Profile *profile;
+
+@interface EditProfileViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate>
+//@property Profile *profile;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
+@property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic) NSMutableArray *capturedImages;
 
 @end
 
@@ -27,14 +33,13 @@
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = self.editButton;
     [self disableAllTextFieldEditing];
-
 }
 
 - (void)loadProfileInfo
 {
-    self.nameTextField.text = self.profile.name;
-    self.usernameTextfield.text = self.profile.username;
-    self.emailTextField.text = self.profile.email;
+    self.nameTextField.text = [Instaclone currentProfile].name;
+    self.usernameTextfield.text = [Instaclone currentProfile].username;
+    self.emailTextField.text = [Instaclone currentProfile].email;
 }
 
 - (void)disableAllTextFieldEditing
@@ -56,8 +61,18 @@
 {
     if ([self.nameTextField.text isEqualToString:@""]||[self.usernameTextfield.text isEqualToString:@""]||[self.emailTextField.text isEqualToString:@""])
     {
-        NSLog(@"Alert user here");
-        //TODO: alert user if text is empty
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"EMPTY SPACES"
+                                                                       message:@"Please make sure there are no blank fields"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alert addAction:okButton];
+        [self presentViewController:alert
+                           animated:YES
+                         completion:nil];
+
     }
 
     else
@@ -65,17 +80,49 @@
         self.navigationItem.rightBarButtonItem = self.editButton;
         [self disableAllTextFieldEditing];
 
-        self.profile.name = self.nameTextField.text;
-        self.profile.username = self.usernameTextfield.text;
-        self.profile.email = self.emailTextField.text;
+        [Instaclone currentProfile].name = self.nameTextField.text;
+        [Instaclone currentProfile].username = self.usernameTextfield.text;
+        [Instaclone currentProfile].email = self.emailTextField.text;
 
-        [self.profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        [[Instaclone currentProfile] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
         {
             [self loadProfileInfo];
         }];
     }
 }
 
+- (IBAction)showImagePickerForEditPhoto:(UIButton *)sender
+{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+
+    self.imagePickerController = imagePickerController;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
+    NSData *imageData = UIImagePNGRepresentation(image);
+    [Instaclone currentProfile].profilePhoto = imageData;
+
+    [[Instaclone currentProfile] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
+        self.profileImageView.image = image;
+    }];
+
+    self.imagePickerController = nil;
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 
 @end

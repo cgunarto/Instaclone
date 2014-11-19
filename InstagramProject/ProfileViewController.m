@@ -32,7 +32,6 @@
 
 }
 
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -61,8 +60,8 @@
     self.profileImageView.image = image;
 
     PFQuery *photoQuery = [Photo query];
-    [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error)
+    [photoQuery whereKey:@"user" equalTo:[Instaclone currentProfile]];
+    [photoQuery countObjectsInBackgroundWithBlock:^(int number, NSError *error)
     {
         self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
     }];
