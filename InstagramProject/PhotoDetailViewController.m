@@ -117,7 +117,7 @@
 - (void)refreshDisplay
 {
     PFQuery *queryComments = [Comment query];
-
+    [queryComments whereKey:@"photo" equalTo:self.selectedPhoto];
     [queryComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error)
         {
