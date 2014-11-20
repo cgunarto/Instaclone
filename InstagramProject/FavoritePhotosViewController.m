@@ -20,6 +20,9 @@
 
 @implementation FavoritePhotosViewController
 
+
+#pragma mark View Controller Life Cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -30,14 +33,24 @@
     [super viewDidAppear:animated];
 
     PFQuery *query = [Photo query];
-    NSArray *userWhoFavorited = @[[Instaclone currentProfile]];
-    [query whereKey:@"userWhoFavorited" containsAllObjectsInArray:userWhoFavorited];
+    [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
-        self.photos = objects;
-        [self.collectionView reloadData];
+        if (!error)
+        {
+            self.photos = objects;
+
+            //reload the collectionViewCell if there is a photo -- this will crash if it wasn't here
+            if (self.photos.count > 0)
+            {
+                [self.collectionView reloadData];
+            }
+        }
+
     }];
 }
+
+#pragma mark Collection View Cell Methods
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -67,59 +80,138 @@
     return CGSizeMake(width, width);
 }
 
-//- (IBAction)onPhotoLongPressed:(UILongPressGestureRecognizer *)gesture
-//{
-//    CGPoint selectedPoint = [gesture locationInView:self.collectionView];
-//    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:selectedPoint];
-//
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE" message:@"Delete Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
-//
-//    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete"
-//                                                           style:UIAlertActionStyleDefault
-//                                                         handler:^(UIAlertAction *action)
-//                                   {
-//                                       Photo *photo = self.photos[selectedIndexPath.item];
-//                                       //remove user from photo's userWhoFavorited array.
-//                                    
-//
-//
-//                                       [self.collectionView reloadData];
-//                                       [alert dismissViewControllerAnimated:YES completion:nil];
-//                                   }];
-//
-//    //Add Twitter send
-//    UIAlertAction* tweetButton = [UIAlertAction actionWithTitle:@"Tweet it!"
-//                                                          style:UIAlertActionStyleDefault
-//                                                        handler:^(UIAlertAction * action)
-//                                  {
-//                                      SLComposeViewController *tweetSheet = [SLComposeViewController
-//                                                                             composeViewControllerForServiceType:SLServiceTypeTwitter];
-//                                      [tweetSheet setInitialText:@"I love this photo!"];
-//                                      [tweetSheet addImage:[UIImage imageWithData:self.favoritedPhotosArray[selectedIndexPath.item]]];
-//
-//                                      [self presentViewController:tweetSheet animated:YES completion:nil];
-//
-//                                      [alert dismissViewControllerAnimated:YES completion:nil];
-//
-//                                  }];
-//
-//    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
-//                                                           style:UIAlertActionStyleDefault
-//                                                         handler:^(UIAlertAction * action)
-//                                   {
-//                                       [alert dismissViewControllerAnimated:YES completion:nil];
-//                                       
-//                                   }];
-//    
-//    
-//    [alert addAction:deleteButton];
-//    [alert addAction:tweetButton];
-//    [alert addAction:cancelButton];
-//    [self presentViewController:alert
-//                       animated:YES
-//                     completion:nil];
-//
-//}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Cell at %ld I was tapped!",(long)indexPath.item);
+    [self performSegueWithIdentifier:@"segueToFavDetail" sender:self];
+};
+
+
+#pragma mark Helper Method
+
+- (void) queryForFavPhotosAndReloadCell
+{
+    //Reloading the data
+    PFQuery *query = [Photo query];
+    [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         self.photos = objects;
+         [self.collectionView reloadData];
+     }];
+}
+
+#pragma mark Long Press
+//Long press on collection view cell to bring up options
+- (IBAction)onPhotoLongPressed:(UILongPressGestureRecognizer *)gesture
+{
+    CGPoint selectedPoint = [gesture locationInView:self.collectionView];
+    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:selectedPoint];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE" message:@"Delete Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       Photo *photo = self.photos[selectedIndexPath.item];
+                                       NSString *ourPhotoObjectID = photo.objectId;
+
+                                       //Grabbing the most recent data of selected Photo
+                                       PFQuery *queryPhoto = [Photo query];
+                                       [queryPhoto whereKey:@"objectId" equalTo:ourPhotoObjectID];
+                                       [queryPhoto getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+                                        {
+                                            PFObject *photo = object;
+                                            photo = object;
+
+                                            //Removing the current Profile from the usersWhoFavorited array
+                                            NSMutableArray *usersWhoFavorited = [@[]mutableCopy];
+                                            usersWhoFavorited = photo[@"usersWhoFavorited"];
+
+                                            //Checking for the same profil with the same objectID
+                                            for (Profile *profile in usersWhoFavorited)
+                                            {
+                                                if ([profile.objectId isEqual:[Instaclone currentProfile].objectId])
+                                                {
+                                                    [usersWhoFavorited removeObject:profile];
+                                                }
+                                            }
+
+                                            NSArray *usersWhoFavoritedUpdatedArray = usersWhoFavorited;
+                                            photo[@"usersWhoFavorited"] = usersWhoFavoritedUpdatedArray;
+
+                                            [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                                            {
+                                                if (!error)
+                                                {
+                                                    [self queryForFavPhotosAndReloadCell];
+                                                }
+                                            }];
+                                        }];
+
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                   }];
+
+    //Add Twitter send
+    UIAlertAction* tweetButton = [UIAlertAction actionWithTitle:@"Tweet it!"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action)
+                                  {
+                                      SLComposeViewController *tweetSheet = [SLComposeViewController
+                                                                             composeViewControllerForServiceType:SLServiceTypeTwitter];
+                                      [tweetSheet setInitialText:@"I love this photo!"];
+
+
+                                      Photo *photo = self.photos[selectedIndexPath.item];
+                                      [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+                                      {
+                                          [tweetSheet addImage:[UIImage imageWithData:data]];
+                                      }];
+
+                                      [self presentViewController:tweetSheet animated:YES completion:nil];
+                                      [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                  }];
+
+    UIAlertAction* fbButton = [UIAlertAction actionWithTitle:@"Share to Facebook!"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action)
+                                  {
+                                      SLComposeViewController *fbSheet = [SLComposeViewController
+                                                                             composeViewControllerForServiceType:SLServiceTypeFacebook];
+                                      [fbSheet setInitialText:@"I love this photo!"];
+
+
+                                      Photo *photo = self.photos[selectedIndexPath.item];
+                                      [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+                                       {
+                                           [fbSheet addImage:[UIImage imageWithData:data]];
+                                       }];
+
+                                      [self presentViewController:fbSheet animated:YES completion:nil];
+                                      [alert dismissViewControllerAnimated:YES completion:nil];
+                                      
+                                  }];
+
+    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+    
+    
+    [alert addAction:deleteButton];
+    [alert addAction:tweetButton];
+    [alert addAction:fbButton];
+    [alert addAction:cancelButton];
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+
+}
 
 
 

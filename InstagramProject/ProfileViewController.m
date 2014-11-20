@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followingButton;
 @property (weak, nonatomic) IBOutlet UIButton *followersButton;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 @property NSArray *photos;
@@ -26,6 +27,9 @@
 @end
 
 @implementation ProfileViewController
+
+
+#pragma mark View Controller Life Cycle
 
 - (void)viewDidLoad
 {
@@ -50,10 +54,12 @@
         else
         {
             self.photos = objects;
+            [self.collectionView reloadData];
         }
     }];
 
-    self.usernameLabel.text = [Instaclone currentProfile].name;
+    //Setting the initial text, image and buttons to reflect user profile state
+    self.usernameLabel.text = [Instaclone currentProfile].username;
 
     [[Instaclone currentProfile].profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error)
@@ -69,13 +75,22 @@
     {
         self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
     }];
+
+    self.followersButton.titleLabel.text = [NSString stringWithFormat:@"%lu Followers",(unsigned long)[Instaclone currentProfile].followers.count];
+
+    self.followingButton.titleLabel.text = [NSString stringWithFormat:@"%lu Following",(unsigned long)[Instaclone currentProfile].following.count];
+
 }
+
+#pragma mark Collection View Methods
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCollectionViewCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
     Photo *photo = self.photos[indexPath.item];
+
+    //TODO: move this into Photo.h and add completion block
     [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
     {
         NSData *imageData = data;
@@ -88,6 +103,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.photos.count;
+}
+
+//Makes sure photo is filling up the full width of the screen
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return CGSizeMake(width, width);
 }
 
 
