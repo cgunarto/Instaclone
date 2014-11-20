@@ -647,7 +647,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Nbm-CT-Ht1" kind="push" id="cBa-f0-9lh"/>
+                                            <segue destination="Nbm-CT-Ht1" kind="push" id="5kF-gR-KaB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -710,6 +710,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8gP-Jh-7yz"/>
                     <connections>
+                        <outlet property="followersButton" destination="SsA-91-9MH" id="4ci-Z6-PcZ"/>
                         <outlet property="followingButton" destination="yta-4L-HNs" id="jBb-IN-K6l"/>
                         <outlet property="postLabel" destination="2Fo-Ar-KnR" id="vRZ-sb-6qv"/>
                         <outlet property="profileImageView" destination="SPZ-a8-G4x" id="cXo-dS-ipj"/>
