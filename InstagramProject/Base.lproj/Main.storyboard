@@ -197,16 +197,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkm-fF-ygb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fkm-fF-ygb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="318"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="318" id="vvO-4h-Mit"/>
+                                </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-TH-WSu">
-                                <rect key="frame" x="40" y="341" width="240" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFw-9u-F9n">
                                 <rect key="frame" x="135" y="471" width="50" height="30"/>
                                 <state key="normal" title="Upload">
@@ -216,13 +212,39 @@
                                     <action selector="onUploadImageButtonPressed:" destination="utT-Jk-C8Q" eventType="touchUpInside" id="zFJ-Sn-H4h"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqO-fU-ezi">
+                                <rect key="frame" x="0.0" y="400" width="320" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="utT-Jk-C8Q" id="6f1-Kk-Svc"/>
+                                </connections>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="CAPTION" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-TH-WSu">
+                                <rect key="frame" x="0.0" y="319" width="320" height="73"/>
+                                <color key="backgroundColor" red="0.74434946424944803" green="1" blue="0.98689564038053901" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="73" id="V8c-sE-9vL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z1R-TH-WSu" firstAttribute="leading" secondItem="kfn-c1-bUv" secondAttribute="leadingMargin" constant="-16" id="9Xu-1l-J8X"/>
+                            <constraint firstItem="fkm-fF-ygb" firstAttribute="top" secondItem="kfn-c1-bUv" secondAttribute="topMargin" id="ZDO-ee-LZs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fkm-fF-ygb" secondAttribute="trailing" constant="-16" id="alb-8m-7ru"/>
+                            <constraint firstItem="fkm-fF-ygb" firstAttribute="leading" secondItem="kfn-c1-bUv" secondAttribute="leadingMargin" constant="-16" id="cm3-Rw-1ef"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z1R-TH-WSu" secondAttribute="trailing" constant="-16" id="mQ5-qy-S83"/>
+                            <constraint firstItem="z1R-TH-WSu" firstAttribute="top" secondItem="fkm-fF-ygb" secondAttribute="bottom" constant="1" id="thr-Uf-sQi"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera" id="U6q-0A-GVQ"/>
                     <connections>
                         <outlet property="captionTextView" destination="z1R-TH-WSu" id="ar5-Cc-vgN"/>
                         <outlet property="imageView" destination="fkm-fF-ygb" id="gbq-JN-fOu"/>
+                        <outlet property="tagTextField" destination="kqO-fU-ezi" id="Qh4-H3-RVX"/>
                         <segue destination="dUW-nA-r0k" kind="push" identifier="segueToUploadDetail" id="a30-Ep-Wdx"/>
                     </connections>
                 </viewController>
