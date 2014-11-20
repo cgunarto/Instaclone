@@ -24,7 +24,7 @@
     profile.username = @"Test Name";
     [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
-            NSLog(@"%@", error.localizedDescription);
+            NSLog(@"Error if object isn't returning%@", error.localizedDescription);
         } else {
             [self refreshDisplay];
         }
