@@ -363,6 +363,7 @@
                     <navigationItem key="navigationItem" id="xN7-Lz-zr8"/>
                     <connections>
                         <outlet property="commentTextField" destination="fnK-md-Dz2" id="my9-aZ-uy0"/>
+                        <outlet property="followButton" destination="QiK-Qg-fgj" id="rxw-eE-nkX"/>
                         <outlet property="imageView" destination="Icl-ms-sMI" id="U6B-CX-IHU"/>
                         <outlet property="tableView" destination="doA-Ot-qqN" id="xFC-Xf-1ne"/>
                         <outlet property="usernameLabel" destination="LFP-2P-eD4" id="2md-bx-4cw"/>

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UITextField *commentTextField;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
 
 @property NSArray *commentsArray;
 
@@ -28,6 +29,15 @@
 {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+
+    if (![self.selectedPhoto.usersWhoFavorited containsObject:[Instaclone currentProfile]])
+    {
+        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+    }
 }
 
 
@@ -42,12 +52,14 @@
         self.usernameLabel.text = username;
     }];
 
+    [self.tableView reloadData];
 }
 
 // following button
 
 - (IBAction)onFollowButtonPressed:(UIButton *)sender
 {
+
     [self.selectedPhoto addObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
     [self.selectedPhoto save];
 }
@@ -75,6 +87,8 @@
             [self refreshDisplay];
         }
     }];
+
+    [self.commentTextField resignFirstResponder];
 }
 
 - (void)refreshDisplay
