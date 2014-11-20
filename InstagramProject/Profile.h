@@ -18,6 +18,7 @@
 @property (nonatomic, strong) PFFile *profilePhoto;
 @property (nonatomic, strong) NSArray *followers;
 @property (nonatomic, strong) NSArray *following;
+@property BOOL boolIsChecked;
 
 
 @end
