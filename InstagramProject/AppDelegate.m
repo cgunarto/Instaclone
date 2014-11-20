@@ -11,6 +11,8 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "RootViewController.h"
+#import "Instaclone.h"
+#import "Profile.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +26,19 @@
 
     [Parse setApplicationId:@"Eww6r15TWU1jnr1jKraBtAeXDQMmVU3JioSRZwEH" clientKey:@"YpenHaoHlibQ7xzUSIl6z67TCWtKTSepma0aFV31"];
     [PFFacebookUtils initializeFacebook];
+
+    if ([PFUser currentUser])
+    {
+        PFQuery *profileQuery = [Profile query];
+        [profileQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+        Instaclone *clone = [Instaclone currentClone];
+
+        [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                clone.profile = (Profile *)object;
+            }
+        }];
+    }
 
     return YES;
 }
