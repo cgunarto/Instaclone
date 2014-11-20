@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="an7-Ow-B4z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="an7-Ow-B4z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -138,7 +138,6 @@
                     <navigationItem key="navigationItem" id="JZm-Zv-YwD"/>
                     <connections>
                         <outlet property="collectionView" destination="6tR-LX-xMg" id="8OI-e9-9Yr"/>
-                        <segue destination="T9V-jL-LpF" kind="push" identifier="segueToFavDetail" id="FGx-kW-pIS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lE8-hR-jNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -259,7 +258,7 @@
         <!--Photo Detail View Controller-->
         <scene sceneID="wLx-6b-pw8">
             <objects>
-                <viewController id="xQ6-au-s8G" customClass="PhotoDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoDetailViewController" id="xQ6-au-s8G" customClass="PhotoDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dpj-qv-UmN"/>
                         <viewControllerLayoutGuide type="bottom" id="uGA-z6-kTL"/>

@@ -10,6 +10,7 @@
 #import "Instaclone.h"
 #import "FavPhotoCollectionViewCell.h"
 #import "Photo.h"
+#import "PhotoDetailViewController.h"
 #import <Social/Social.h>
 
 @interface FavoritePhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -82,8 +83,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Cell at %ld I was tapped!",(long)indexPath.item);
-    [self performSegueWithIdentifier:@"segueToFavDetail" sender:self];
+    Photo *selectedPhoto = self.photos[indexPath.item];
+    [self showPhotoDetailViewControllerForPhoto:selectedPhoto];
 };
 
 
@@ -99,6 +100,17 @@
          self.photos = objects;
          [self.collectionView reloadData];
      }];
+}
+
+- (void)showPhotoDetailViewControllerForPhoto: (Photo *)photo
+{
+    PhotoDetailViewController *photoDetailVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([PhotoDetailViewController class])];
+    photoDetailVC.selectedPhoto = photo;
+
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:photoDetailVC];
+    [self presentViewController:navVC animated:YES completion:^{
+        nil;
+    }];
 }
 
 #pragma mark Long Press
