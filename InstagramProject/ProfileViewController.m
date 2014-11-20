@@ -17,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followingButton;
+
 
 @property NSArray *photos;
 
@@ -88,5 +88,7 @@
 {
     return self.photos.count;
 }
+
+
 
 @end
