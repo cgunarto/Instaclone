@@ -72,6 +72,20 @@
 }
 
 
+#pragma mark Helper Method
+
+- (void) queryForFavPhotosAndReloadCell
+{
+    //Reloading the data
+    PFQuery *query = [Photo query];
+    [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+     {
+         self.photos = objects;
+         [self.collectionView reloadData];
+     }];
+}
+
 #pragma mark Long Press
 //Long press on collection view cell to bring up options
 - (IBAction)onPhotoLongPressed:(UILongPressGestureRecognizer *)gesture
@@ -86,19 +100,40 @@
                                                          handler:^(UIAlertAction *action)
                                    {
                                        Photo *photo = self.photos[selectedIndexPath.item];
-                                       //remove user from photo's userWhoFavorited array.
+                                       NSString *ourPhotoObjectID = photo.objectId;
 
-                                       //TODO: check out how to remove this profile photo
-                                       [photo removeObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
-
-                                       PFQuery *query = [Photo query];
-                                       [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
-                                       [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+                                       //Grabbing the most recent data of selected Photo
+                                       PFQuery *queryPhoto = [Photo query];
+                                       [queryPhoto whereKey:@"objectId" equalTo:ourPhotoObjectID];
+                                       [queryPhoto getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
                                         {
-                                            self.photos = objects;
-                                            [self.collectionView reloadData];
-                                        }];
+                                            PFObject *photo = object;
+                                            photo = object;
 
+                                            //Removing the current Profile from the usersWhoFavorited array
+                                            NSMutableArray *usersWhoFavorited = [@[]mutableCopy];
+                                            usersWhoFavorited = photo[@"usersWhoFavorited"];
+
+                                            //Checking for the same profil with the same objectID
+                                            for (Profile *profile in usersWhoFavorited)
+                                            {
+                                                if ([profile.objectId isEqual:[Instaclone currentProfile].objectId])
+                                                {
+                                                    [usersWhoFavorited removeObject:profile];
+                                                }
+                                            }
+
+                                            NSArray *usersWhoFavoritedUpdatedArray = usersWhoFavorited;
+                                            photo[@"usersWhoFavorited"] = usersWhoFavoritedUpdatedArray;
+
+                                            [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+                                            {
+                                                if (!error)
+                                                {
+                                                    [self queryForFavPhotosAndReloadCell];
+                                                }
+                                            }];
+                                        }];
 
                                        [alert dismissViewControllerAnimated:YES completion:nil];
                                    }];
