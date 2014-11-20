@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UITextField *commentTextField;
 @property (strong, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
 
 @property NSArray *commentsArray;
 
@@ -29,13 +30,15 @@
 
     [self refreshDisplay];
 
-//    if (![self.selectedPhoto.usersWhoFavorited containsObject:self.selectedPhoto])
+//    Profile *profile = [Profile object];
+//
+//    if (![profile.following containsObject:self.selectedPhoto.user.username])
 //    {
-//        [self.favoriteButton setTitle:@"Favorite" forState:UIControlStateNormal];
+//        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
 //    }
 //    else
 //    {
-//        [self.favoriteButton setTitle:@"Unfavorite" forState:UIControlStateNormal];
+//        [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
 //    }
 }
 
@@ -66,10 +69,18 @@
 // follow button
 - (IBAction)onFollowButtonPressed:(UIButton *)sender
 {
-    Profile *following = [Profile object];
+    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
+        Profile *following = [Profile object];
 
-    [following addObject:[Instaclone currentProfile] forKey:@"following"];
-    [following save];
+        [following addObject:username forKey:@"following"];
+        [following save];
+    }];
+
+//
+//    Profile *following = [Profile object];
+//
+//    [following addObject:[Instaclone currentProfile] forKey:@"following"];
+//    [following save];
 }
 
 

@@ -373,6 +373,7 @@
                     <connections>
                         <outlet property="commentTextField" destination="fnK-md-Dz2" id="my9-aZ-uy0"/>
                         <outlet property="favoriteButton" destination="QiK-Qg-fgj" id="pkA-JO-hHT"/>
+                        <outlet property="followButton" destination="4nu-h7-Qzc" id="gpS-mz-dPo"/>
                         <outlet property="imageView" destination="Icl-ms-sMI" id="U6B-CX-IHU"/>
                         <outlet property="tableView" destination="doA-Ot-qqN" id="xFC-Xf-1ne"/>
                         <outlet property="usernameLabel" destination="LFP-2P-eD4" id="2md-bx-4cw"/>
