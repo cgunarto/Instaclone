@@ -61,8 +61,6 @@
 //    }
 
     [self.tableView reloadData];
-
-    NSLog(@"%@", self.selectedPhoto.usersWhoFavorited);
 }
 
 // follow button
@@ -82,8 +80,6 @@
 
     [self.selectedPhoto addObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
     [self.selectedPhoto save];
-
-//    [self.selectedPhoto.usersWhoFavorited addObject:self.selectedPhoto];
 
 }
 
@@ -118,6 +114,7 @@
 {
     PFQuery *queryComments = [Comment query];
     [queryComments whereKey:@"photo" equalTo:self.selectedPhoto];
+    [queryComments orderByDescending:@"createdAt"];
     [queryComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error)
         {
