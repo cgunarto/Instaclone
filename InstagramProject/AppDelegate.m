@@ -27,7 +27,7 @@
     [Parse setApplicationId:@"Eww6r15TWU1jnr1jKraBtAeXDQMmVU3JioSRZwEH" clientKey:@"YpenHaoHlibQ7xzUSIl6z67TCWtKTSepma0aFV31"];
     [PFFacebookUtils initializeFacebook];
 
-  //  [PFUser logOut];
+//    [PFUser logOut];
 //    if ([PFUser currentUser])
 //    {
 //        PFQuery *profileQuery = [Profile query];

@@ -7,34 +7,110 @@
 //
 
 #import "PhotoDetailViewController.h"
+#import "Instaclone.h"
+#import "Comment.h"
 
-@interface PhotoDetailViewController ()
+@interface PhotoDetailViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
+
+@property NSArray *commentsArray;
 
 @end
 
 @implementation PhotoDetailViewController
 
+// viewwillappear not working...
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self.selectedPhoto standardImageWithCompletionBlock:^(UIImage *selectedPhoto) {
+        self.imageView.image = selectedPhoto;
+    }];
+
+    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
+        self.usernameLabel.text = username;
+    }];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// following button
+
+- (IBAction)onFollowButtonPressed:(UIButton *)sender
+{
+    [self.selectedPhoto addObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
+    [self.selectedPhoto save];
 }
 
-/*
-#pragma mark - Navigation
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    return YES;
 }
-*/
+- (IBAction)onCommentButtonPressed:(UIButton *)sender
+{
+    Comment *comment = [Comment object];
+    comment.text = self.commentTextField.text;
+    comment.photo = self.selectedPhoto;
+    comment.userWhoCommented = [Instaclone currentProfile];
+
+    [comment saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error)
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        else
+        {
+            [self refreshDisplay];
+        }
+    }];
+}
+
+- (void)refreshDisplay
+{
+    PFQuery *queryComments = [Comment query];
+
+    [queryComments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        else
+        {
+            self.commentsArray = objects;
+            [self.tableView reloadData];
+        }
+    }];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.commentsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // need custom tableview cell here
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    Comment *comment = self.commentsArray[indexPath.row];
+    cell.textLabel.text = comment.text;
+//    cell.detailTextLabel.text = comment.userWhoCommented.username;
+
+    return cell;
+}
 
 @end

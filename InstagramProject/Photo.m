@@ -7,7 +7,6 @@
 //
 
 #import "Photo.h"
-#import "Instaclone.h"
 
 @implementation Photo
 
@@ -18,6 +17,7 @@
 @dynamic userPhotos;
 @dynamic dateString;
 @dynamic tag;
+@dynamic usersWhoFavorited;
 
 
 //MARK: Parse methods
@@ -56,5 +56,6 @@
         completionBlock([Instaclone currentProfile].username);
     }];
 }
+
 
 @end

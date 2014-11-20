@@ -32,7 +32,7 @@
     PFQuery *queryTaggedPhotos =[Photo query];
 
     //TODO:can you search through an array with ContainsString? May need to use string StringWithFormat
-    [queryTaggedPhotos whereKey:@"tags" containsString:textResult];
+    [queryTaggedPhotos whereKey:@"tag" containsString:textResult];
 
     [queryTaggedPhotos findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error)
@@ -79,7 +79,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(Photo *)photo
 {
     PhotoDetailViewController *photoDetailVC = segue.destinationViewController;
-//    photoDetailVC.selectedPhoto = photo;
+    photoDetailVC.selectedPhoto = photo;
 }
 
 

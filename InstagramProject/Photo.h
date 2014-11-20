@@ -7,8 +7,12 @@
 //
 
 #import <Parse/Parse.h>
+#import "Instaclone.h"
 
 @class Profile;
+@class Photo;
+
+typedef void (^PhotoResultBlock)(Photo *photo, NSError *error);
 
 @interface Photo : PFObject <PFSubclassing>
 
@@ -21,6 +25,8 @@
 @property NSArray *userPhotos;
 @property NSString *dateString;
 @property NSString *tag;
+@property NSArray *usersWhoFavorited;
+
 
 -(void)standardImageWithCompletionBlock:(void(^)(UIImage *))completionBlock;
 -(void)usernameWithCompletionBlock:(void(^)(NSString *username))completionBlock;
