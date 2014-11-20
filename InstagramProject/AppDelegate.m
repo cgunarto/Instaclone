@@ -11,6 +11,8 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "RootViewController.h"
+#import "Instaclone.h"
+#import "Profile.h"
 
 @interface AppDelegate ()
 
@@ -25,8 +27,24 @@
     [Parse setApplicationId:@"Eww6r15TWU1jnr1jKraBtAeXDQMmVU3JioSRZwEH" clientKey:@"YpenHaoHlibQ7xzUSIl6z67TCWtKTSepma0aFV31"];
     [PFFacebookUtils initializeFacebook];
 
+  //  [PFUser logOut];
+//    if ([PFUser currentUser])
+//    {
+//        PFQuery *profileQuery = [Profile query];
+//        [profileQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+//        Instaclone *clone = [Instaclone currentClone];
+//
+//        [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//            if (object) {
+//                clone.profile = (Profile *)object;
+//            }
+//        }];
+//    }
+
     return YES;
 }
+
+
 
 #pragma mark - Facebook Login Handlers
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -45,11 +63,11 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
 
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 
@@ -57,8 +75,8 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
+
+    
     [self saveContext];
 }
 
