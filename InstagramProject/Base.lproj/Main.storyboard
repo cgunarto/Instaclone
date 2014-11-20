@@ -519,7 +519,6 @@
         <!--Search View Controller-->
         <scene sceneID="i9i-Xp-nnF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qVP-lt-Igl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="a5K-vK-d2E" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gwq-mr-BOd"/>
@@ -595,6 +594,7 @@
                         <segue destination="xQ6-au-s8G" kind="push" identifier="segueToPhotoDetail" id="orQ-dL-3F6"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVP-lt-Igl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1437" y="1779"/>
         </scene>
