@@ -259,7 +259,7 @@
         <!--Photo Detail View Controller-->
         <scene sceneID="wLx-6b-pw8">
             <objects>
-                <viewController storyboardIdentifier="PhotoDetailViewController" id="xQ6-au-s8G" customClass="PhotoDetailViewController" sceneMemberID="viewController">
+                <viewController id="xQ6-au-s8G" customClass="PhotoDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dpj-qv-UmN"/>
                         <viewControllerLayoutGuide type="bottom" id="uGA-z6-kTL"/>
