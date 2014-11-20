@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="an7-Ow-B4z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="an7-Ow-B4z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -519,7 +519,6 @@
         <!--Search View Controller-->
         <scene sceneID="i9i-Xp-nnF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qVP-lt-Igl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="a5K-vK-d2E" customClass="SearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gwq-mr-BOd"/>
@@ -595,6 +594,7 @@
                         <segue destination="xQ6-au-s8G" kind="push" identifier="segueToPhotoDetail" id="orQ-dL-3F6"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVP-lt-Igl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1437" y="1779"/>
         </scene>
@@ -632,18 +632,24 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9G7-aE-Xas">
-                                        <rect key="frame" x="183" y="33" width="74" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOc-3W-7Uj">
-                                        <rect key="frame" x="183" y="62" width="74" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yta-4L-HNs">
+                                        <rect key="frame" x="187" y="62" width="66" height="30"/>
+                                        <state key="normal" title="Following">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Xk8-hG-uo0" kind="push" id="id3-NL-BvN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsA-91-9MH">
+                                        <rect key="frame" x="187" y="35" width="66" height="30"/>
+                                        <state key="normal" title="Followers">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Nbm-CT-Ht1" kind="push" id="5kF-gR-KaB"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.73816898730800684" green="0.83575649237044169" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -704,14 +710,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="8gP-Jh-7yz"/>
                     <connections>
-                        <outlet property="followerLabel" destination="9G7-aE-Xas" id="7yG-vL-rQU"/>
-                        <outlet property="followingLabel" destination="hOc-3W-7Uj" id="Kha-cS-YgP"/>
+                        <outlet property="followersButton" destination="SsA-91-9MH" id="4ci-Z6-PcZ"/>
+                        <outlet property="followingButton" destination="yta-4L-HNs" id="jBb-IN-K6l"/>
                         <outlet property="postLabel" destination="2Fo-Ar-KnR" id="vRZ-sb-6qv"/>
                         <outlet property="profileImageView" destination="SPZ-a8-G4x" id="cXo-dS-ipj"/>
                         <outlet property="usernameLabel" destination="O9j-Ty-QJY" id="hfl-HA-oSk"/>
                         <segue destination="bE1-Bz-8yU" kind="push" identifier="segueToEditProfile" id="ZSu-nr-tQZ"/>
-                        <segue destination="Nbm-CT-Ht1" kind="push" identifier="segueToFollowers" id="c9z-JJ-Hxf"/>
-                        <segue destination="Xk8-hG-uo0" kind="push" identifier="segueToFollowing" id="cBb-Ho-abC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfw-0X-qRo" userLabel="First Responder" sceneMemberID="firstResponder"/>

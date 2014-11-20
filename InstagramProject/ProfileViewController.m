@@ -17,8 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followingButton;
+@property (weak, nonatomic) IBOutlet UIButton *followersButton;
+
 
 @property NSArray *photos;
 
@@ -75,10 +76,12 @@
     PhotoCollectionViewCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
     Photo *photo = self.photos[indexPath.item];
-    NSData *imageData = photo[@"image"];
-    UIImage *image = [UIImage imageWithData:imageData];
-    photoCell.cellImageView.image = image;
-
+    [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        NSData *imageData = data;
+        UIImage *image = [UIImage imageWithData:imageData];
+        photoCell.cellImageView.image = image;
+    }];
     return photoCell;
 }
 
@@ -86,5 +89,7 @@
 {
     return self.photos.count;
 }
+
+
 
 @end

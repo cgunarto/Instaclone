@@ -232,10 +232,16 @@
 
     Instaclone *clone = [Instaclone currentClone];
 
-    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        //TODO: Set error message later
-        clone.profile = profile;
-
+    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
+        if(error)
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        else
+        {
+            clone.profile = profile;
+        }
     }];
 
 

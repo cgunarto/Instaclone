@@ -17,7 +17,8 @@
 
 @implementation FollowingViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     Profile *profile = [Profile object];
