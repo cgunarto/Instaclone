@@ -17,6 +17,7 @@
 
 @dynamic userPhotos;
 @dynamic dateString;
+@dynamic tag;
 
 
 //MARK: Parse methods

@@ -11,7 +11,7 @@
 #import "Photo.h"
 #import "Instaclone.h"
 
-@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate>
+@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate>
 
 @property UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -44,6 +44,13 @@
 
     // So that tapping on other tabs will NOT trigger the showCamera method
     self.tabBarController.delegate = nil;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+
+    return YES;
 }
 
 - (void)showCamera
@@ -84,6 +91,7 @@
         NSData *imageData = UIImageJPEGRepresentation(self.imageView.image, 0.05f);
         photo.photoFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
         photo.caption = self.captionTextView.text;
+        photo.tag = self.tagTextField.text;
         photo.user = [Instaclone currentProfile];
 
         [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

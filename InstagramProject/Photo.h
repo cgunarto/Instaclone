@@ -20,6 +20,7 @@
 
 @property NSArray *userPhotos;
 @property NSString *dateString;
+@property NSString *tag;
 
 -(void)standardImageWithCompletionBlock:(void(^)(UIImage *))completionBlock;
 -(void)usernameWithCompletionBlock:(void(^)(NSString *username))completionBlock;
