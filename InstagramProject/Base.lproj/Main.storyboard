@@ -67,51 +67,11 @@
                     <navigationItem key="navigationItem" id="FdU-5F-wIf"/>
                     <connections>
                         <outlet property="collectionView" destination="LAc-3E-6VO" id="wug-wd-E2p"/>
-                        <segue destination="wIN-QS-Wv1" kind="push" identifier="segueToMainFeed" id="Hjf-V1-e3n"/>
-                        <segue destination="Mdj-VH-2Z7" kind="push" identifier="segueToCommentDetail" id="0yc-wD-vmc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-51" y="1097"/>
-        </scene>
-        <!--User Profile View Controller-->
-        <scene sceneID="TuW-YX-zXc">
-            <objects>
-                <viewController id="wIN-QS-Wv1" customClass="UserProfileViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ODq-FB-eBk"/>
-                        <viewControllerLayoutGuide type="bottom" id="Te2-49-cwk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Aad-JA-yMw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="0PI-kG-UNE"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KJg-rd-3Kp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-464" y="1810"/>
-        </scene>
-        <!--Comment Detail View Controller-->
-        <scene sceneID="yqO-mi-upI">
-            <objects>
-                <viewController id="Mdj-VH-2Z7" customClass="CommentDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9tl-5K-Zkm"/>
-                        <viewControllerLayoutGuide type="bottom" id="5Ow-ro-vF0"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hRL-O6-ndF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="gL5-5e-Jqg"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S4H-FH-utr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-51" y="1810"/>
         </scene>
         <!--Favorite Photos View Controller-->
         <scene sceneID="RbR-C0-xqV">
@@ -642,23 +602,23 @@
                                             <constraint firstAttribute="width" constant="75" id="Sfb-Rk-vGU"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fo-Ar-KnR">
-                                        <rect key="frame" x="115" y="44" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fo-Ar-KnR">
+                                        <rect key="frame" x="99" y="39" width="89" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="AlY-TD-t0i"/>
+                                            <constraint firstAttribute="width" constant="89" id="on9-xo-dM1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yta-4L-HNs">
-                                        <rect key="frame" x="187" y="62" width="66" height="30"/>
-                                        <state key="normal" title="Following">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="Xk8-hG-uo0" kind="push" id="id3-NL-BvN"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsA-91-9MH">
-                                        <rect key="frame" x="187" y="35" width="66" height="30"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="SsA-91-9MH">
+                                        <rect key="frame" x="99" y="62" width="89" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="aca-Ay-brv"/>
+                                            <constraint firstAttribute="width" constant="89" id="hJj-VX-j3z"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans-LightItalic" family="Gill Sans" pointSize="15"/>
                                         <state key="normal" title="Followers">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -667,23 +627,43 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9j-Ty-QJY">
-                                        <rect key="frame" x="115" y="12" width="138" height="21"/>
+                                        <rect key="frame" x="99" y="15" width="138" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="0EK-Ao-gqk"/>
                                             <constraint firstAttribute="width" constant="138" id="JOF-GQ-OOc"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yta-4L-HNs">
+                                        <rect key="frame" x="204" y="62" width="116" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="5LT-M6-fip"/>
+                                            <constraint firstAttribute="width" constant="116" id="brM-49-BFX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans-LightItalic" family="Gill Sans" pointSize="15"/>
+                                        <state key="normal" title="Following">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Xk8-hG-uo0" kind="push" id="id3-NL-BvN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.73816898730800684" green="0.83575649237044169" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="2Fo-Ar-KnR" firstAttribute="leading" secondItem="SPZ-a8-G4x" secondAttribute="trailing" constant="8" id="Dx0-4w-NX8"/>
+                                    <constraint firstItem="yta-4L-HNs" firstAttribute="top" secondItem="O9j-Ty-QJY" secondAttribute="bottom" constant="26" id="Fpb-Bp-aRT"/>
+                                    <constraint firstItem="yta-4L-HNs" firstAttribute="leading" secondItem="SsA-91-9MH" secondAttribute="trailing" constant="16" id="Jhd-H9-1Ww"/>
+                                    <constraint firstItem="2Fo-Ar-KnR" firstAttribute="top" secondItem="O9j-Ty-QJY" secondAttribute="bottom" constant="3" id="Klb-9b-JUC"/>
+                                    <constraint firstItem="SsA-91-9MH" firstAttribute="leading" secondItem="SPZ-a8-G4x" secondAttribute="trailing" constant="8" id="ZAh-MC-P6b"/>
                                     <constraint firstAttribute="height" constant="100" id="bNs-2F-iPV"/>
                                     <constraint firstItem="SPZ-a8-G4x" firstAttribute="leading" secondItem="iWA-jp-CYB" secondAttribute="leading" constant="16" id="dRC-y0-50b"/>
-                                    <constraint firstItem="O9j-Ty-QJY" firstAttribute="leading" secondItem="SPZ-a8-G4x" secondAttribute="trailing" constant="24" id="iX4-K5-679"/>
-                                    <constraint firstItem="O9j-Ty-QJY" firstAttribute="top" secondItem="iWA-jp-CYB" secondAttribute="top" constant="12" id="nEY-cO-0aL"/>
+                                    <constraint firstItem="O9j-Ty-QJY" firstAttribute="leading" secondItem="SPZ-a8-G4x" secondAttribute="trailing" constant="8" id="iX4-K5-679"/>
+                                    <constraint firstItem="O9j-Ty-QJY" firstAttribute="top" secondItem="iWA-jp-CYB" secondAttribute="top" constant="15" id="nEY-cO-0aL"/>
                                     <constraint firstItem="SPZ-a8-G4x" firstAttribute="top" secondItem="iWA-jp-CYB" secondAttribute="top" constant="12" id="vBt-8q-SMc"/>
+                                    <constraint firstItem="SsA-91-9MH" firstAttribute="top" secondItem="2Fo-Ar-KnR" secondAttribute="bottom" constant="2" id="vcS-no-cPs"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mI5-RO-6lh">
@@ -744,6 +724,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="mI5-RO-6lh" id="S9N-eA-YWi"/>
                         <outlet property="followersButton" destination="SsA-91-9MH" id="4ci-Z6-PcZ"/>
                         <outlet property="followingButton" destination="yta-4L-HNs" id="jBb-IN-K6l"/>
                         <outlet property="postLabel" destination="2Fo-Ar-KnR" id="vRZ-sb-6qv"/>

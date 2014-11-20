@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followingButton;
 @property (weak, nonatomic) IBOutlet UIButton *followersButton;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 @property NSArray *photos;
@@ -50,6 +51,7 @@
         else
         {
             self.photos = objects;
+            [self.collectionView reloadData];
         }
     }];
 
@@ -69,6 +71,11 @@
     {
         self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
     }];
+
+    self.followersButton.titleLabel.text = [NSString stringWithFormat:@"%lu Followers",(unsigned long)[Instaclone currentProfile].followers.count];
+
+    self.followingButton.titleLabel.text = [NSString stringWithFormat:@"%lu Following",(unsigned long)[Instaclone currentProfile].following.count];
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
