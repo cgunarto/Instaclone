@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F2BDED91A1E7B7600B54D9C /* FavDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2BDED81A1E7B7600B54D9C /* FavDetailViewController.m */; };
+		4F5A02F81A1C27B300EC9560 /* FavPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A02F71A1C27B300EC9560 /* FavPhotoCollectionViewCell.m */; };
 		4F5A02FB1A1C36B700EC9560 /* FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A02FA1A1C36B700EC9560 /* FollowingViewController.m */; };
 		4F5A02FE1A1C47B300EC9560 /* MainFeedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A02FD1A1C47B300EC9560 /* MainFeedCollectionViewCell.m */; };
 		4F5A03011A1D0D4100EC9560 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A03001A1D0D4100EC9560 /* Comment.m */; };
-		4F5A02F81A1C27B300EC9560 /* FavPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5A02F71A1C27B300EC9560 /* FavPhotoCollectionViewCell.m */; };
 		4F67C25E1A1AD3F100990970 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F67C25D1A1AD3F100990970 /* main.m */; };
 		4F67C2611A1AD3F100990970 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F67C2601A1AD3F100990970 /* AppDelegate.m */; };
 		4F67C2641A1AD3F100990970 /* InstagramProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F67C2621A1AD3F100990970 /* InstagramProject.xcdatamodeld */; };
@@ -65,14 +66,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F2BDED71A1E7B7600B54D9C /* FavDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavDetailViewController.h; sourceTree = "<group>"; };
+		4F2BDED81A1E7B7600B54D9C /* FavDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavDetailViewController.m; sourceTree = "<group>"; };
+		4F5A02F61A1C27B300EC9560 /* FavPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		4F5A02F71A1C27B300EC9560 /* FavPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		4F5A02F91A1C36B700EC9560 /* FollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingViewController.h; sourceTree = "<group>"; };
 		4F5A02FA1A1C36B700EC9560 /* FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingViewController.m; sourceTree = "<group>"; };
 		4F5A02FC1A1C47B300EC9560 /* MainFeedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFeedCollectionViewCell.h; sourceTree = "<group>"; };
 		4F5A02FD1A1C47B300EC9560 /* MainFeedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFeedCollectionViewCell.m; sourceTree = "<group>"; };
 		4F5A02FF1A1D0D4100EC9560 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		4F5A03001A1D0D4100EC9560 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		4F5A02F61A1C27B300EC9560 /* FavPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavPhotoCollectionViewCell.h; sourceTree = "<group>"; };
-		4F5A02F71A1C27B300EC9560 /* FavPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		4F67C2581A1AD3F100990970 /* InstagramProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F67C25C1A1AD3F100990970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F67C25D1A1AD3F100990970 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 				904AE7B81A1C3616006B313E /* MainfeedTableViewCell.m */,
 				4F67C2841A1AD4EC00990970 /* FavoritePhotosViewController.h */,
 				4F67C2851A1AD4EC00990970 /* FavoritePhotosViewController.m */,
+				4F2BDED71A1E7B7600B54D9C /* FavDetailViewController.h */,
+				4F2BDED81A1E7B7600B54D9C /* FavDetailViewController.m */,
 				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
 				4F67C2881A1AD4FF00990970 /* CameraViewController.m */,
 				4F67C28A1A1AD51100990970 /* SearchViewController.h */,
@@ -436,6 +441,7 @@
 				4FEFB5D31A1C187900255736 /* Photo.m in Sources */,
 				4F67C2A11A1AD85E00990970 /* FollowersViewController.m in Sources */,
 				4F5A02F81A1C27B300EC9560 /* FavPhotoCollectionViewCell.m in Sources */,
+				4F2BDED91A1E7B7600B54D9C /* FavDetailViewController.m in Sources */,
 				4F67C2921A1AD67D00990970 /* UserProfileViewController.m in Sources */,
 				4F67C2951A1AD6CC00990970 /* CommentDetailViewController.m in Sources */,
 				4F5A02FB1A1C36B700EC9560 /* FollowingViewController.m in Sources */,

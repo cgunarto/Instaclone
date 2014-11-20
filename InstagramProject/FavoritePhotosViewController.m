@@ -39,7 +39,9 @@
         if (!error)
         {
             self.photos = objects;
-            if (self.photos.count > 1)
+
+            //reload the collectionViewCell if there is a photo -- this will crash if it wasn't here
+            if (self.photos.count > 0)
             {
                 [self.collectionView reloadData];
             }
@@ -77,6 +79,12 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     return CGSizeMake(width, width);
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Cell at %ld I was tapped!",(long)indexPath.item);
+    [self performSegueWithIdentifier:@"segueToFavDetail" sender:self];
+};
 
 
 #pragma mark Helper Method
