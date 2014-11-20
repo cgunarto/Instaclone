@@ -17,6 +17,7 @@
 @dynamic profilePhoto;
 @dynamic followers;
 @dynamic following;
+@dynamic boolIsChecked;
 
 + (void)load
 {

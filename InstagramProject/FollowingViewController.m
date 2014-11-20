@@ -11,7 +11,7 @@
 
 @interface FollowingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *followingArray;
+@property (nonatomic, strong) NSMutableArray *followingArray;
 
 @end
 
@@ -20,16 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    Profile *profile = [Profile object];
-    profile.username = @"Test Name";
-    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (error) {
-            NSLog(@"Error if object isn't returning%@", error.localizedDescription);
-        } else {
-            [self refreshDisplay];
-        }
-    }];
+    self.followingArray = [NSMutableArray new];
 
 }
 
@@ -45,42 +36,78 @@
     NSString *ourProfilesObjectID = ourProfile.objectId;
 
     PFQuery *query = [Profile query];
-    [query whereKey:@"objectID" equalTo:ourProfilesObjectID];
-    [query orderByAscending:@"createdAt"];
+    [query whereKey:@"objectId" equalTo:ourProfilesObjectID];
+    //referene pointers to
+    [query includeKey:@"following"];
 
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         Profile *ourRefreshProfile = (Profile *)object;
-        self.followingArray = ourRefreshProfile.followers;
+        
+        [Instaclone currentClone].profile = ourRefreshProfile;
+
+        self.followingArray = [ourRefreshProfile.following mutableCopy];
+        [self.tableView reloadData];
+
+
 
     }];
 
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"Error, didn't refresh followers Array %@", error.localizedDescription);
-        }
-        else
-        {
-            self.followingArray = objects;
 
-            [self.tableView reloadData];
-        }
-    }];
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 
-    Profile *object = self.followingArray[indexPath.row];
-    cell.textLabel.text = object.name;
+    Profile *profile = self.followingArray[indexPath.row];
+
+    cell.textLabel.text = profile.username;
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
     return self.followingArray.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+
+    //if selected, display an alertview, if select unfollow, query data, then
+    UIAlertController *unfollowOrCancelAlert = [UIAlertController alertControllerWithTitle:@"Unfollow User?" message:@"Are you sure you want to unfollow this user?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *unfollow = [UIAlertAction actionWithTitle:@"Unfollow" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                             {
+                                 //we have that updated array, we just need to remove one
+                                 [self.followingArray removeObjectAtIndex:indexPath.row];
+
+                                 //reload the data after deletion
+                                 [self.tableView reloadData];
+
+                                 //setting updated array to our current profiles following attribute essentially updating it in memory
+                                 [Instaclone currentProfile].following = self.followingArray;
+
+                                 //share update with cloud through save in background
+                                 [[Instaclone currentProfile] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                     nil;
+                                 }];
+
+
+
+
+
+                             }];
+    [unfollowOrCancelAlert addAction:unfollow];
+
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:nil];
+    [unfollowOrCancelAlert addAction:cancel];
+
+    [self presentViewController:unfollowOrCancelAlert animated:YES completion:nil];
+
+
 }
 
 
