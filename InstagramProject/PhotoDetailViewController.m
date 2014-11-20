@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UITextField *commentTextField;
-@property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet UIButton *favoriteButton;
 
 @property NSArray *commentsArray;
 
@@ -23,21 +23,20 @@
 
 @implementation PhotoDetailViewController
 
-// viewwillappear not working...
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
 
-    if (![self.selectedPhoto.usersWhoFavorited containsObject:[Instaclone currentProfile]])
-    {
-        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-    }
+    [self refreshDisplay];
+
+//    if (![self.selectedPhoto.usersWhoFavorited containsObject:self.selectedPhoto])
+//    {
+//        [self.favoriteButton setTitle:@"Favorite" forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        [self.favoriteButton setTitle:@"Unfavorite" forState:UIControlStateNormal];
+//    }
 }
 
 
@@ -52,16 +51,40 @@
         self.usernameLabel.text = username;
     }];
 
+//    if (![self.selectedPhoto.usersWhoFavorited containsObject:self.selectedPhoto])
+//    {
+//        [self.favoriteButton setTitle:@"Favorite" forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        [self.favoriteButton setTitle:@"Unfavorite" forState:UIControlStateNormal];
+//    }
+
     [self.tableView reloadData];
+
+    NSLog(@"%@", self.selectedPhoto.usersWhoFavorited);
 }
 
-// following button
-
+// follow button
 - (IBAction)onFollowButtonPressed:(UIButton *)sender
+{
+    Profile *following = [Profile object];
+
+    [following addObject:[Instaclone currentProfile] forKey:@"following"];
+    [following save];
+}
+
+
+// favorite button
+
+- (IBAction)onFavoriteButtonPressed:(UIButton *)sender
 {
 
     [self.selectedPhoto addObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
     [self.selectedPhoto save];
+
+//    [self.selectedPhoto.usersWhoFavorited addObject:self.selectedPhoto];
+
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

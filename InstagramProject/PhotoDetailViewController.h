@@ -12,5 +12,6 @@
 @interface PhotoDetailViewController : UIViewController
 
 @property Photo *selectedPhoto;
+@property Profile *profile;
 
 @end
