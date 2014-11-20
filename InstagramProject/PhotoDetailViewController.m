@@ -81,12 +81,23 @@
 // follow button
 - (IBAction)onFollowButtonPressed:(UIButton *)sender
 {
-    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
-        Profile *following = [Profile object];
+    Profile *profile = self.selectedPhoto.user;
+    PFQuery *query = [Profile query];
+    [query whereKey:@"objectId" equalTo:profile.objectId];
 
-        [following addObject:username forKey:@"following"];
-        [following save];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        PFObject *profile = object;
+
+        [profile addObject:profile forKey:@"followers"];
+        [profile save];
     }];
+
+//    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
+//        Profile *following = [Profile object];
+//
+//        [following addObject:username forKey:@"following"];
+//        [following save];
+//    }];
 
 //
 //    Profile *following = [Profile object];
