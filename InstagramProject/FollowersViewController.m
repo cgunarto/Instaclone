@@ -7,9 +7,13 @@
 //
 
 #import "FollowersViewController.h"
+//#import "Profile.h"
+#import "Instaclone.h"
 
-@interface FollowersViewController ()
+@interface FollowersViewController ()<UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *followersArray;
 
 @end
 
@@ -17,22 +21,67 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self refreshDisplay];
 }
 
-/*
-#pragma mark - Navigation
+- (void)refreshDisplay
+{
+    Profile *ourProfile = [Instaclone currentProfile];
+    NSString *ourProfilesObjectID = ourProfile.objectId;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    PFQuery *query = [Profile query];
+    [query whereKey:@"objectID" equalTo:ourProfilesObjectID];
+    [query orderByAscending:@"createdAt"];
+
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        Profile *ourRefreshProfile = (Profile *)object;
+        self.followersArray = ourRefreshProfile.followers;
+
+    }];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error, didn't refresh followers Array %@", error.localizedDescription);
+        }
+        else
+        {
+            self.followersArray = objects;
+
+            [self.tableView reloadData];
+        }
+    }];
 }
-*/
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    Profile *object = self.followersArray[indexPath.row];
+    cell.textLabel.text = object.name;
+
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.followersArray.count;
+}
+
+//-(void)AddFollowerToUser:(Profile *)profile
+//{
+//    //Need to declare block in profile.h and implement in.m
+//    [Profile addFollowerWithName:[Instaclone currentProfile].username complete^(PFObject *object, NSError *error){
+//    }];
+//
+//
+//}
+
+
 
 @end

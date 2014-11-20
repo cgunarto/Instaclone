@@ -7,9 +7,11 @@
 //
 
 #import "FollowingViewController.h"
+#import "Instaclone.h"
 
-@interface FollowingViewController ()
+@interface FollowingViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *followingArray;
 
 @end
 
@@ -17,22 +19,68 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    Profile *profile = [Profile object];
+    profile.username = @"Test Name";
+    [profile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        } else {
+            [self refreshDisplay];
+        }
+    }];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refreshDisplay];
 }
 
-/*
-#pragma mark - Navigation
+-(void)refreshDisplay
+{
+    Profile *ourProfile = [Instaclone currentProfile];
+    NSString *ourProfilesObjectID = ourProfile.objectId;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    PFQuery *query = [Profile query];
+    [query whereKey:@"objectID" equalTo:ourProfilesObjectID];
+    [query orderByAscending:@"createdAt"];
+
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        Profile *ourRefreshProfile = (Profile *)object;
+        self.followingArray = ourRefreshProfile.followers;
+
+    }];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error, didn't refresh followers Array %@", error.localizedDescription);
+        }
+        else
+        {
+            self.followingArray = objects;
+
+            [self.tableView reloadData];
+        }
+    }];
+    
 }
-*/
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+    Profile *object = self.followingArray[indexPath.row];
+    cell.textLabel.text = object.name;
+
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.followingArray.count;
+}
+
 
 @end
