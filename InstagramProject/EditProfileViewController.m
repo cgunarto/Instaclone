@@ -32,6 +32,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = self.editButton;
+    [self loadProfileInfo];
     [self disableAllTextFieldEditing];
 }
 

@@ -53,7 +53,7 @@
         }
     }];
 
-    self.usernameLabel.text = [Instaclone currentProfile].name;
+    self.usernameLabel.text = [Instaclone currentProfile].username;
 
     [[Instaclone currentProfile].profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error)
