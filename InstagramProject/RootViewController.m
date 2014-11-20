@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property NSArray *arrayOfPhotoObjects;
-//@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 
 @end
@@ -30,7 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
 
 
@@ -126,7 +124,17 @@
 
     else
     {
-        [self downloadAllImages];
+        PFQuery *profileQuery = [Profile query];
+        [profileQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+        Instaclone *clone = [Instaclone currentClone];
+
+        [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                clone.profile = (Profile *)object;
+                [self downloadAllImages];
+            }
+        }];
+
     }
 
 }
@@ -174,16 +182,6 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
-    PFQuery *profileQuery = [Profile query];
-    [profileQuery whereKey:@"user" equalTo:user];
-    Instaclone *clone = [Instaclone currentClone];
-
-    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (object) {
-            clone.profile = (Profile *)object;
-        }
-    }];
-
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
