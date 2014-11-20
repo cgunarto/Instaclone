@@ -101,7 +101,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="er9-lW-fUD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="er9-lW-fUD">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                     <gestureRecognizers/>
                                                     <connections>
@@ -111,6 +111,12 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="er9-lW-fUD" firstAttribute="top" secondItem="byj-g5-lfP" secondAttribute="topMargin" constant="-8" id="7fc-bZ-w74"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="er9-lW-fUD" secondAttribute="trailing" constant="-8" id="K2E-Eg-h2F"/>
+                                            <constraint firstItem="er9-lW-fUD" firstAttribute="leading" secondItem="byj-g5-lfP" secondAttribute="leadingMargin" constant="-8" id="Pnd-6L-dfM"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="er9-lW-fUD" secondAttribute="bottom" constant="-8" id="f4c-QP-jew"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="er9-lW-fUD" id="WG5-ES-YC8"/>
                                         </connections>

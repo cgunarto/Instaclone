@@ -30,8 +30,7 @@
     [super viewDidAppear:animated];
 
     PFQuery *query = [Photo query];
-    NSArray *userWhoFavorited = @[[Instaclone currentProfile]];
-    [query whereKey:@"userWhoFavorited" containsAllObjectsInArray:userWhoFavorited];
+    [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
         self.photos = objects;
