@@ -97,6 +97,12 @@
     return self.photos.count;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return CGSizeMake(width, width);
+}
+
 
 
 @end
