@@ -50,9 +50,21 @@
         self.imageView.image = selectedPhoto;
     }];
 
-    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
-        self.usernameLabel.text = username;
+    Profile *profile = self.selectedPhoto.user;
+    PFQuery *query = [Profile query];
+    [query whereKey:@"objectId" equalTo:profile.objectId];
+
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        PFObject *profile = object;
+
+        self.usernameLabel.text = profile[@"username"];
     }];
+
+//    self.usernameLabel.text = self.selectedPhoto.user.username;
+
+//    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
+//        self.usernameLabel.text = username;
+//    }];
 
 //    if (![self.selectedPhoto.usersWhoFavorited containsObject:self.selectedPhoto])
 //    {
