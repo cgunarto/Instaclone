@@ -7,12 +7,16 @@
 //
 
 #import "Photo.h"
+#import "Instaclone.h"
 
 @implementation Photo
 
 @dynamic photoFile;
 @dynamic user;
 @dynamic caption;
+
+@dynamic userPhotos;
+@dynamic dateString;
 
 
 //MARK: Parse methods
@@ -24,6 +28,32 @@
 + (NSString *)parseClassName
 {
     return @"Photo";
+}
+
+-(NSString *)dateString
+{
+    NSDate *date = self.createdAt;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"EEEE MMMM d, YYYY"];
+    NSString *creationDate = [dateFormat stringFromDate:date];
+    
+    return creationDate;
+
+}
+
+-(void)standardImageWithCompletionBlock:(void(^)(UIImage *))completionBlock
+{
+    [self.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        completionBlock([UIImage imageWithData:data]);
+    }];
+}
+
+-(void)usernameWithCompletionBlock:(void(^)(NSString *username))completionBlock {
+
+    [[Instaclone currentProfile] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        completionBlock([Instaclone currentProfile].username);
+    }];
 }
 
 @end
