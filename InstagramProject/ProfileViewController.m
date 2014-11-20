@@ -74,11 +74,13 @@
 {
     PhotoCollectionViewCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
-    PFObject *photo = self.photos[indexPath.item];
-    NSData *imageData = photo[@"image"];
-    UIImage *image = [UIImage imageWithData:imageData];
-    photoCell.cellImageView.image = image;
-
+    Photo *photo = self.photos[indexPath.item];
+    [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        NSData *imageData = data;
+        UIImage *image = [UIImage imageWithData:imageData];
+        photoCell.cellImageView.image = image;
+    }];
     return photoCell;
 }
 
