@@ -51,6 +51,7 @@
 		87872D5A1A1C0D550075DEDA /* Instaclone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87872D591A1C0D550075DEDA /* Instaclone.m */; };
 		904AE7AC1A1BFB5C006B313E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A21A1ADAEA00990970 /* Bolts.framework */; };
 		904AE7AD1A1BFB5C006B313E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67C2A31A1ADAEA00990970 /* Parse.framework */; };
+		904AE7B91A1C3616006B313E /* MainfeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 904AE7B81A1C3616006B313E /* MainfeedTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,8 @@
 		87872D541A1C0B420075DEDA /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		87872D581A1C0D550075DEDA /* Instaclone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instaclone.h; sourceTree = "<group>"; };
 		87872D591A1C0D550075DEDA /* Instaclone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instaclone.m; sourceTree = "<group>"; };
+		904AE7B71A1C3616006B313E /* MainfeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainfeedTableViewCell.h; sourceTree = "<group>"; };
+		904AE7B81A1C3616006B313E /* MainfeedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainfeedTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +217,8 @@
 				4F67C2601A1AD3F100990970 /* AppDelegate.m */,
 				4F67C2651A1AD3F100990970 /* RootViewController.h */,
 				4F67C2661A1AD3F100990970 /* RootViewController.m */,
+				904AE7B71A1C3616006B313E /* MainfeedTableViewCell.h */,
+				904AE7B81A1C3616006B313E /* MainfeedTableViewCell.m */,
 				4F67C2841A1AD4EC00990970 /* FavoritePhotosViewController.h */,
 				4F67C2851A1AD4EC00990970 /* FavoritePhotosViewController.m */,
 				4F67C2871A1AD4FF00990970 /* CameraViewController.h */,
@@ -446,6 +451,7 @@
 				4F67C2981A1AD78D00990970 /* UploadDetailViewController.m in Sources */,
 				4F67C29E1A1AD85000990970 /* EditProfileViewController.m in Sources */,
 				4F67C2671A1AD3F100990970 /* RootViewController.m in Sources */,
+				904AE7B91A1C3616006B313E /* MainfeedTableViewCell.m in Sources */,
 				4F67C25E1A1AD3F100990970 /* main.m in Sources */,
 				4F67C29B1A1AD7E500990970 /* PhotoDetailViewController.m in Sources */,
 				4FEFB5BF1A1B338200255736 /* PhotoCollectionViewCell.m in Sources */,

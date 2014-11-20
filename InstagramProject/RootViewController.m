@@ -13,9 +13,14 @@
 #import <ParseUI/ParseUI.h>
 #import "Profile.h"
 #import "Instaclone.h"
+#import "Photo.h"
+#import "MainFeedCollectionViewCell.h"
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property NSArray *arrayOfPhotoObjects;
+
 
 @end
 
@@ -24,11 +29,71 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    //FBLoginView *loginView = [[FBLoginView alloc] init];
-    //loginView.center = self.view.center;
-    //[self.view addSubview:loginView];
 }
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.arrayOfPhotoObjects.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+
+    // need to retrieve photos...
+    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
+     {
+         cell.imageView.image = photo;
+     }];
+
+//    //UserName
+//    [photoPost usernameWithCompletionBlock:^(NSString *username)
+//     {
+//         cell.userNameLabel.text = username;
+//     }];
+//
+//    //PhotoCaption
+//    cell.photoCaptionTextView.text = photoPost.caption;
+//
+//    //TimeLabel
+//    cell.dateLabel.text = photoPost.dateString;
+
+    return cell;
+}
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.arrayOfPhotoObjects.count;
+//}
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+//
+//    // need to retrieve photos...
+//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
+//    {
+//        cell.photo.image = photo;
+//    }];
+//
+//    //UserName
+//    [photoPost usernameWithCompletionBlock:^(NSString *username)
+//    {
+//        cell.userNameLabel.text = username;
+//    }];
+//
+//    //PhotoCaption
+//    cell.photoCaptionTextView.text = photoPost.caption;
+//
+//    //TimeLabel
+//    cell.dateLabel.text = photoPost.dateString;
+//
+//    return cell;
+//
+//}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -55,6 +120,47 @@
 
     }
 
+    // Go to Mainfeed VC
+
+    else
+    {
+        PFQuery *profileQuery = [Profile query];
+        [profileQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+        Instaclone *clone = [Instaclone currentClone];
+
+        [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object) {
+                clone.profile = (Profile *)object;
+                [self downloadAllImages];
+            }
+        }];
+
+    }
+
+}
+
+- (IBAction)onLogoutButtonPressed:(id)sender
+{
+    [PFUser logOut];
+}
+
+
+- (void)downloadAllImages
+{
+    PFQuery *query = [PFQuery queryWithClassName:[Photo parseClassName]];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"Error: %@",error);
+        }else
+        {
+            self.arrayOfPhotoObjects = objects;
+            [self.collectionView reloadData];
+        }
+    }];
+
 }
 
 #pragma mark - PfLoginViewController Delegate Methods
@@ -76,16 +182,6 @@
 //Sent to the delegate when a PFUser is logged in
 - (void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
-    PFQuery *profileQuery = [Profile query];
-    [profileQuery whereKey:@"user" equalTo:user];
-    Instaclone *clone = [Instaclone currentClone];
-
-    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (object) {
-            clone.profile = (Profile *)object;
-        }
-    }];
-
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -147,6 +243,8 @@
             clone.profile = profile;
         }
     }];
+
+
     //Dismiss PFSignUpViewController;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -163,15 +261,7 @@
     NSLog(@"User dismissed the signupViewController");
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 0;
-}
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return nil;
-}
 
 
 @end
