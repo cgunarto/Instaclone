@@ -108,6 +108,8 @@
     photoDetailVC.selectedPhoto = photo;
 
     UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:photoDetailVC];
+
+    //TODO:add a back button
     [self presentViewController:navVC animated:YES completion:^{
         nil;
     }];

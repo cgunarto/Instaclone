@@ -210,50 +210,11 @@
                         <outlet property="captionTextView" destination="z1R-TH-WSu" id="ar5-Cc-vgN"/>
                         <outlet property="imageView" destination="fkm-fF-ygb" id="gbq-JN-fOu"/>
                         <outlet property="tagTextField" destination="kqO-fU-ezi" id="Qh4-H3-RVX"/>
-                        <segue destination="dUW-nA-r0k" kind="push" identifier="segueToUploadDetail" id="a30-Ep-Wdx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4p-jw-rUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1071" y="1097"/>
-        </scene>
-        <!--Fav Detail View Controller-->
-        <scene sceneID="EvN-fT-Icg">
-            <objects>
-                <viewController id="T9V-jL-LpF" customClass="FavDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rNq-9M-ypB"/>
-                        <viewControllerLayoutGuide type="bottom" id="yDa-Sc-CuA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yrv-qz-e26">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="adp-N4-cOV"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LCB-KX-W77" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="469" y="2581"/>
-        </scene>
-        <!--Upload Detail View Controller-->
-        <scene sceneID="Kv0-KO-tEj">
-            <objects>
-                <viewController id="dUW-nA-r0k" customClass="UploadDetailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="wbH-j1-tk9"/>
-                        <viewControllerLayoutGuide type="bottom" id="XCl-pS-B8M"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Wb-ia-O9Z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="W2Z-HQ-TP2"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Qb-Mt-Wbb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1071" y="1879"/>
         </scene>
         <!--Photo Detail View Controller-->
         <scene sceneID="wLx-6b-pw8">
