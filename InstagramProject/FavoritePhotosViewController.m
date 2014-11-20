@@ -36,8 +36,15 @@
     [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
-        self.photos = objects;
-        [self.collectionView reloadData];
+        if (!error)
+        {
+            self.photos = objects;
+            if (self.photos.count > 1)
+            {
+                [self.collectionView reloadData];
+            }
+        }
+
     }];
 }
 

@@ -118,6 +118,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="er9-lW-fUD" id="WG5-ES-YC8"/>
                                             <outletCollection property="gestureRecognizers" destination="dod-Kh-vKs" appends="YES" id="cMp-aS-NSk"/>
+                                            <segue destination="T9V-jL-LpF" kind="push" id="tSv-vz-XkA"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -216,6 +217,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4p-jw-rUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="977" y="1097"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EvN-fT-Icg">
+            <objects>
+                <viewController id="T9V-jL-LpF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rNq-9M-ypB"/>
+                        <viewControllerLayoutGuide type="bottom" id="yDa-Sc-CuA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yrv-qz-e26">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="adp-N4-cOV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LCB-KX-W77" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="469" y="1743"/>
         </scene>
         <!--Upload Detail View Controller-->
         <scene sceneID="Kv0-KO-tEj">
