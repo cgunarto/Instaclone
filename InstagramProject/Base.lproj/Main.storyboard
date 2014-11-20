@@ -104,13 +104,11 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="er9-lW-fUD">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                     <gestureRecognizers/>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="pqs-hp-eha" appends="YES" id="bkn-S5-6jj"/>
-                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="er9-lW-fUD" firstAttribute="top" secondItem="byj-g5-lfP" secondAttribute="topMargin" constant="-8" id="7fc-bZ-w74"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="er9-lW-fUD" secondAttribute="trailing" constant="-8" id="K2E-Eg-h2F"/>
@@ -119,6 +117,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="er9-lW-fUD" id="WG5-ES-YC8"/>
+                                            <outletCollection property="gestureRecognizers" destination="dod-Kh-vKs" appends="YES" id="cMp-aS-NSk"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -142,10 +141,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lE8-hR-jNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="pqs-hp-eha">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="dod-Kh-vKs">
                     <connections>
-                        <action selector="onPhotoLongPressed:" destination="bfo-T3-IT0" id="XQ0-yU-RU3"/>
-                        <outlet property="delegate" destination="bfo-T3-IT0" id="6nH-r0-XVM"/>
+                        <action selector="onPhotoLongPressed:" destination="bfo-T3-IT0" id="5Ni-Lx-f7Q"/>
+                        <outlet property="delegate" destination="bfo-T3-IT0" id="fMt-We-Gna"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>

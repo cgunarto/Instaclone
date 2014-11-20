@@ -28,6 +28,9 @@
 
 @implementation ProfileViewController
 
+
+#pragma mark View Controller Life Cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,6 +58,7 @@
         }
     }];
 
+    //Setting the initial text, image and buttons to reflect user profile state
     self.usernameLabel.text = [Instaclone currentProfile].username;
 
     [[Instaclone currentProfile].profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -78,11 +82,15 @@
 
 }
 
+#pragma mark Collection View Methods
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCollectionViewCell *photoCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
 
     Photo *photo = self.photos[indexPath.item];
+
+    //TODO: move this into Photo.h and add completion block
     [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
     {
         NSData *imageData = data;
@@ -97,6 +105,7 @@
     return self.photos.count;
 }
 
+//Makes sure photo is filling up the full width of the screen
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
