@@ -14,10 +14,11 @@
 #import "Profile.h"
 #import "Instaclone.h"
 #import "Photo.h"
-#import "MainFeedCollectionViewCell.h"
+#import "MainfeedTableViewCell.h"
 
-@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+//@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property NSArray *arrayOfPhotoObjects;
 
@@ -31,22 +32,53 @@
     [super viewDidLoad];
 }
 
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.arrayOfPhotoObjects.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
 
     // need to retrieve photos...
     [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
      {
-         cell.imageView.image = photo;
+         cell.photo.image = photo;
      }];
+
+    // PhotoCaption
+        cell.photoCaptionTextView.text = photoPost.caption;
+    
+        //TimeLabel
+        cell.dateLabel.text = photoPost.dateString;
+
+    //UserName
+        [photoPost usernameWithCompletionBlock:^(NSString *username)
+         {
+             cell.userNameLabel.text = username;
+         }];
+
+    return cell;
+}
+
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+//{
+//    return self.arrayOfPhotoObjects.count;
+//}
+//
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+//
+//    // need to retrieve photos...
+//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
+//     {
+//         cell.imageView.image = photo;
+//     }];
 
 //    //UserName
 //    [photoPost usernameWithCompletionBlock:^(NSString *username)
@@ -60,8 +92,8 @@
 //    //TimeLabel
 //    cell.dateLabel.text = photoPost.dateString;
 
-    return cell;
-}
+//    return cell;
+//}
 
 //- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 //{
@@ -157,7 +189,7 @@
         }else
         {
             self.arrayOfPhotoObjects = objects;
-            [self.collectionView reloadData];
+            [self.tableView reloadData];
         }
     }];
 
