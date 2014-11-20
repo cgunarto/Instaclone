@@ -404,7 +404,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="1899" y="1820"/>
+            <point key="canvasLocation" x="2937" y="1824"/>
         </scene>
         <!--Followers View Controller-->
         <scene sceneID="JF1-XB-nLy">
@@ -708,14 +708,19 @@
                             <constraint firstItem="Fex-Le-uQb" firstAttribute="top" secondItem="mI5-RO-6lh" secondAttribute="bottom" id="x5R-KG-8DM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8gP-Jh-7yz"/>
+                    <navigationItem key="navigationItem" id="8gP-Jh-7yz">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="2VF-1H-0Aa">
+                            <connections>
+                                <segue destination="bE1-Bz-8yU" kind="push" id="HmK-zv-7Eq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="followersButton" destination="SsA-91-9MH" id="4ci-Z6-PcZ"/>
                         <outlet property="followingButton" destination="yta-4L-HNs" id="jBb-IN-K6l"/>
                         <outlet property="postLabel" destination="2Fo-Ar-KnR" id="vRZ-sb-6qv"/>
                         <outlet property="profileImageView" destination="SPZ-a8-G4x" id="cXo-dS-ipj"/>
                         <outlet property="usernameLabel" destination="O9j-Ty-QJY" id="hfl-HA-oSk"/>
-                        <segue destination="bE1-Bz-8yU" kind="push" identifier="segueToEditProfile" id="ZSu-nr-tQZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfw-0X-qRo" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -67,59 +67,61 @@
     return CGSizeMake(width, width);
 }
 
-//- (IBAction)onPhotoLongPressed:(UILongPressGestureRecognizer *)gesture
-//{
-//    CGPoint selectedPoint = [gesture locationInView:self.collectionView];
-//    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:selectedPoint];
-//
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE" message:@"Delete Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
-//
-//    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete"
-//                                                           style:UIAlertActionStyleDefault
-//                                                         handler:^(UIAlertAction *action)
-//                                   {
-//                                       Photo *photo = self.photos[selectedIndexPath.item];
-//                                       //remove user from photo's userWhoFavorited array.
-//                                    
-//
-//
-//                                       [self.collectionView reloadData];
-//                                       [alert dismissViewControllerAnimated:YES completion:nil];
-//                                   }];
-//
-//    //Add Twitter send
-//    UIAlertAction* tweetButton = [UIAlertAction actionWithTitle:@"Tweet it!"
-//                                                          style:UIAlertActionStyleDefault
-//                                                        handler:^(UIAlertAction * action)
-//                                  {
-//                                      SLComposeViewController *tweetSheet = [SLComposeViewController
-//                                                                             composeViewControllerForServiceType:SLServiceTypeTwitter];
-//                                      [tweetSheet setInitialText:@"I love this photo!"];
-//                                      [tweetSheet addImage:[UIImage imageWithData:self.favoritedPhotosArray[selectedIndexPath.item]]];
-//
-//                                      [self presentViewController:tweetSheet animated:YES completion:nil];
-//
-//                                      [alert dismissViewControllerAnimated:YES completion:nil];
-//
-//                                  }];
-//
-//    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
-//                                                           style:UIAlertActionStyleDefault
-//                                                         handler:^(UIAlertAction * action)
-//                                   {
-//                                       [alert dismissViewControllerAnimated:YES completion:nil];
-//                                       
-//                                   }];
-//    
-//    
-//    [alert addAction:deleteButton];
-//    [alert addAction:tweetButton];
-//    [alert addAction:cancelButton];
-//    [self presentViewController:alert
-//                       animated:YES
-//                     completion:nil];
-//
-//}
+- (IBAction)onPhotoLongPressed:(UILongPressGestureRecognizer *)gesture
+{
+    CGPoint selectedPoint = [gesture locationInView:self.collectionView];
+    NSIndexPath *selectedIndexPath = [self.collectionView indexPathForItemAtPoint:selectedPoint];
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"DELETE" message:@"Delete Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
+
+    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action)
+                                   {
+                                       Photo *photo = self.photos[selectedIndexPath.item];
+                                       //remove user from photo's userWhoFavorited array.
+                                    
+
+
+                                       [self.collectionView reloadData];
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                   }];
+
+    //Add Twitter send
+    UIAlertAction* tweetButton = [UIAlertAction actionWithTitle:@"Tweet it!"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action)
+                                  {
+                                      SLComposeViewController *tweetSheet = [SLComposeViewController
+                                                                             composeViewControllerForServiceType:SLServiceTypeTwitter];
+                                      [tweetSheet setInitialText:@"I love this photo!"];
+
+
+                                      [tweetSheet addImage:[UIImage imageWithData:self.favoritedPhotosArray[selectedIndexPath.item]]];
+
+                                      [self presentViewController:tweetSheet animated:YES completion:nil];
+
+                                      [alert dismissViewControllerAnimated:YES completion:nil];
+
+                                  }];
+
+    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action)
+                                   {
+                                       [alert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
+    
+    
+    [alert addAction:deleteButton];
+    [alert addAction:tweetButton];
+    [alert addAction:cancelButton];
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+
+}
 
 
 
