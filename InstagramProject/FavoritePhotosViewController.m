@@ -174,6 +174,26 @@
 
                                   }];
 
+    UIAlertAction* fbButton = [UIAlertAction actionWithTitle:@"Share to Facebook!"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action)
+                                  {
+                                      SLComposeViewController *fbSheet = [SLComposeViewController
+                                                                             composeViewControllerForServiceType:SLServiceTypeFacebook];
+                                      [fbSheet setInitialText:@"I love this photo!"];
+
+
+                                      Photo *photo = self.photos[selectedIndexPath.item];
+                                      [photo.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+                                       {
+                                           [fbSheet addImage:[UIImage imageWithData:data]];
+                                       }];
+
+                                      [self presentViewController:fbSheet animated:YES completion:nil];
+                                      [alert dismissViewControllerAnimated:YES completion:nil];
+                                      
+                                  }];
+
     UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action)
@@ -185,6 +205,7 @@
     
     [alert addAction:deleteButton];
     [alert addAction:tweetButton];
+    [alert addAction:fbButton];
     [alert addAction:cancelButton];
     [self presentViewController:alert
                        animated:YES
