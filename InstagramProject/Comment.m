@@ -13,6 +13,7 @@
 @dynamic photo;
 @dynamic text;
 @dynamic userWhoCommented;
+@dynamic dateString;
 
 + (void)load
 {
@@ -22,6 +23,18 @@
 + (NSString *)parseClassName
 {
     return @"Comment";
+}
+
+-(NSString *)dateString
+{
+    NSDate *date = self.createdAt;
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"EEEE MMMM d, YYYY"];
+    NSString *creationDate = [dateFormat stringFromDate:date];
+
+    return creationDate;
+
 }
 
 @end

@@ -15,6 +15,6 @@
 @property Photo* photo;
 @property NSString *text;
 @property Profile *userWhoCommented;
-
+@property NSString *dateString;
 
 @end

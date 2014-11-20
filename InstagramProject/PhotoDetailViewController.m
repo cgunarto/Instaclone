@@ -108,6 +108,9 @@
 
     Comment *comment = self.commentsArray[indexPath.row];
     cell.textLabel.text = comment.text;
+    cell.detailTextLabel.text = comment.dateString;
+
+    // below code not working..
 //    cell.detailTextLabel.text = comment.userWhoCommented.username;
 
     return cell;
