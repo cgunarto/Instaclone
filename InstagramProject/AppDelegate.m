@@ -11,8 +11,8 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "RootViewController.h"
-#import "Profile.h"
 #import "Instaclone.h"
+#import "Profile.h"
 
 @interface AppDelegate ()
 
