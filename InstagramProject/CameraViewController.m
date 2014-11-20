@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property BOOL canTakePhoto;
+@property (weak, nonatomic) IBOutlet UITextField *tagTextField;
 
 
 
