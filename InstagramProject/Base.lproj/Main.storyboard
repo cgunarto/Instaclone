@@ -37,17 +37,25 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Yt-Qv-0Ax">
+                                                    <rect key="frame" x="118" y="117" width="65" height="65"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <gestureRecognizers/>
                                         <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="7Yt-Qv-0Ax" secondAttribute="bottom" constant="110" id="2QM-4h-oIo"/>
                                             <constraint firstItem="PLn-ea-mn6" firstAttribute="leading" secondItem="Ytk-pV-UcO" secondAttribute="leadingMargin" constant="-8" id="HF3-Yl-nld"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="PLn-ea-mn6" secondAttribute="bottom" constant="-8" id="W1l-Nt-mdZ"/>
                                             <constraint firstItem="PLn-ea-mn6" firstAttribute="top" secondItem="Ytk-pV-UcO" secondAttribute="topMargin" constant="-8" id="g7G-Oq-cOY"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="7Yt-Qv-0Ax" secondAttribute="trailing" constant="109" id="gqJ-K5-7iC"/>
+                                            <constraint firstItem="7Yt-Qv-0Ax" firstAttribute="top" secondItem="Ytk-pV-UcO" secondAttribute="topMargin" constant="109" id="k2Y-QS-fT2"/>
+                                            <constraint firstItem="7Yt-Qv-0Ax" firstAttribute="leading" secondItem="Ytk-pV-UcO" secondAttribute="leadingMargin" constant="110" id="kO0-8H-RGF"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="PLn-ea-mn6" secondAttribute="trailing" constant="-8" id="yb5-2z-h8a"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="heartImageView" destination="7Yt-Qv-0Ax" id="lfA-6v-Sr5"/>
                                             <outlet property="imageView" destination="PLn-ea-mn6" id="Nsm-kw-jf4"/>
                                             <outletCollection property="gestureRecognizers" destination="Ze7-Jz-gu8" appends="YES" id="9AS-qE-YwW"/>
                                         </connections>

@@ -19,6 +19,7 @@
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
+@property (strong, nonatomic) IBOutlet UIImageView *heartImage;
 
 @property NSArray *arrayOfPhotoObjects;
 @property NSMutableArray *allPhotoArray;
@@ -59,16 +60,18 @@
             [photoToFavorites save];
 
             [self.collectionView reloadData];
+            photoToFavorites.isFavorited = YES;
         }
     }
 }
+
+
 
 
 #pragma mark Collection View Method
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.arrayOfPhotoObjects.count;
     return self.allPhotoArray.count;
 }
 
@@ -82,6 +85,16 @@
 {
     MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     Photo *photoPost = self.allPhotoArray[indexPath.row];
+
+    if (photoPost.isFavorited)
+    {
+        [UIView animateWithDuration:0.7
+                         animations:^{
+                             cell.heartImageView.image = [UIImage imageNamed:@"heart_full"];
+                             cell.heartImageView.alpha =1.0f;
+                             cell.heartImageView.alpha =0.0f;
+                         }];
+    }
 
     // need to retrieve photos...
     [photoPost.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)

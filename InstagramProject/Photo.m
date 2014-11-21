@@ -19,6 +19,7 @@
 @dynamic tag;
 @dynamic usersWhoFavorited;
 
+@dynamic isFavorited;
 
 //MARK: Parse methods
 + (void)load
