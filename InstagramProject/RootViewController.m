@@ -22,6 +22,8 @@
 @property NSArray *arrayOfPhotoObjects;
 @property NSMutableArray *allPhotoArray;
 
+@property UIRefreshControl *refreshControl;
+
 
 @end
 
@@ -30,6 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIRefreshControl *refeshControl = [[UIRefreshControl alloc] init];
+    [refeshControl addTarget:self action:@selector(downloadAllImages:) forControlEvents:UIControlEventValueChanged];
+
+    [self.collectionView addSubview:refeshControl];
 }
 
 #pragma mark Collection View Method
@@ -150,7 +157,7 @@
         [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object) {
                 clone.profile = (Profile *)object;
-                [self downloadAllImages];
+                [self downloadAllImages:self.refreshControl];
             }
         }];
 
@@ -164,7 +171,7 @@
 }
 
 
-- (void)downloadAllImages
+- (void)downloadAllImages:(UIRefreshControl *)refreshControl;
 {
     self.allPhotoArray =[@[]mutableCopy];
     //Getting my own photos
@@ -177,6 +184,7 @@
         if (error)
         {
             NSLog(@"Error: %@",error);
+            [refreshControl endRefreshing];
         }
         else
         {
@@ -207,6 +215,7 @@
                           }
 
                           [self.collectionView reloadData];
+                          [refreshControl endRefreshing];
                       }
                   }];
              }

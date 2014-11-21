@@ -8,7 +8,7 @@
         <!--Root View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="RootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootViewController" id="vXZ-lx-hvc" customClass="RootViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -222,6 +222,7 @@
                         <outlet property="captionTextView" destination="z1R-TH-WSu" id="ar5-Cc-vgN"/>
                         <outlet property="imageView" destination="fkm-fF-ygb" id="gbq-JN-fOu"/>
                         <outlet property="tagTextField" destination="kqO-fU-ezi" id="Qh4-H3-RVX"/>
+                        <outlet property="uploadButton" destination="PFw-9u-F9n" id="jxv-Bn-uA6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4p-jw-rUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
