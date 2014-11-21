@@ -28,18 +28,7 @@
     [PFFacebookUtils initializeFacebook];
 
 //    [PFUser logOut];
-//    if ([PFUser currentUser])
-//    {
-//        PFQuery *profileQuery = [Profile query];
-//        [profileQuery whereKey:@"user" equalTo:[PFUser currentUser]];
-//        Instaclone *clone = [Instaclone currentClone];
-//
-//        [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//            if (object) {
-//                clone.profile = (Profile *)object;
-//            }
-//        }];
-//    }
+
 
     return YES;
 }

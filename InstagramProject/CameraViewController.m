@@ -11,6 +11,7 @@
 #import "Photo.h"
 #import "Instaclone.h"
 #import "RootViewController.h"
+#import "PhotoDetailViewController.h"
 
 @interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -132,12 +133,12 @@
 }
 
 // not working...
-- (void)showMainfeedVC
-{
-    RootViewController *mainVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
-
-    [self.navigationController popToViewController:mainVC animated:YES];
-}
+//- (void)showMainfeedVC
+//{
+//    RootViewController *mainVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
+//
+//    [self.navigationController popToViewController:mainVC animated:YES];
+//}
 
 
 //MARK: IBAction Method

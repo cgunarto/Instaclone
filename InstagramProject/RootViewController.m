@@ -31,6 +31,12 @@
 
 @implementation RootViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.collectionView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -108,11 +114,8 @@
     return cell;
 }
 
-
--(void)viewDidAppear:(BOOL)animated
+-(void)manageLogin
 {
-    [super viewDidAppear:animated];
-
     if (![PFUser currentUser]) {
 
         //Create the log in view controller
@@ -148,15 +151,23 @@
                 [self downloadAllImages:self.refreshControl];
             }
         }];
-
+        
     }
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 
+    [self manageLogin];
 }
 
 - (IBAction)onLogoutButtonPressed:(id)sender
 {
     [PFUser logOut];
-    [self viewDidAppear:YES];
+    
+    [self.allPhotoArray removeAllObjects];
+    [self.collectionView reloadData];
+    [self manageLogin];
 }
 
 
