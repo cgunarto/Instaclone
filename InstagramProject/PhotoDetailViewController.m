@@ -81,29 +81,16 @@
 // follow button
 - (IBAction)onFollowButtonPressed:(UIButton *)sender
 {
+
     Profile *profile = self.selectedPhoto.user;
     PFQuery *query = [Profile query];
     [query whereKey:@"objectId" equalTo:profile.objectId];
 
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        PFObject *profile = object;
 
-        [profile addObject:profile forKey:@"followers"];
-        [profile save];
+        [[Instaclone currentProfile] addObject:object forKey:@"following"];
+        [[Instaclone currentProfile] save];
     }];
-
-//    [self.selectedPhoto usernameWithCompletionBlock:^(NSString *username) {
-//        Profile *following = [Profile object];
-//
-//        [following addObject:username forKey:@"following"];
-//        [following save];
-//    }];
-
-//
-//    Profile *following = [Profile object];
-//
-//    [following addObject:[Instaclone currentProfile] forKey:@"following"];
-//    [following save];
 }
 
 
