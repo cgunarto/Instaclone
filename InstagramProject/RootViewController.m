@@ -18,6 +18,7 @@
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
 
 @property NSArray *arrayOfPhotoObjects;
 @property NSMutableArray *allPhotoArray;
@@ -33,11 +34,35 @@
 {
     [super viewDidLoad];
 
+    //Setup required taps
+    [self.tapGesture setNumberOfTapsRequired:2];
+    [self.tapGesture setNumberOfTouchesRequired:1];
+
     UIRefreshControl *refeshControl = [[UIRefreshControl alloc] init];
     [refeshControl addTarget:self action:@selector(downloadAllImages:) forControlEvents:UIControlEventValueChanged];
 
     [self.collectionView addSubview:refeshControl];
 }
+
+- (IBAction)onTapToAddToFavoritePhoto:(UITapGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint point = [tapGesture locationInView:self.collectionView];
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+
+        if (indexPath)
+        {
+            Photo *photoToFavorites = self.allPhotoArray[indexPath.item];
+
+            [photoToFavorites addObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
+            [photoToFavorites save];
+
+            [self.collectionView reloadData];
+        }
+    }
+}
+
 
 #pragma mark Collection View Method
 
@@ -56,7 +81,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
     Photo *photoPost = self.allPhotoArray[indexPath.row];
 
     // need to retrieve photos...
@@ -68,58 +92,9 @@
         }
     }];
 
-//
-//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
-//     {
-//         cell.imageView.image = photo;
-//     }];
-
-//    //UserName
-//    [photoPost usernameWithCompletionBlock:^(NSString *username)
-//     {
-//         cell.userNameLabel.text = username;
-//     }];
-//
-//    //PhotoCaption
-//    cell.photoCaptionTextView.text = photoPost.caption;
-//
-//    //TimeLabel
-//    cell.dateLabel.text = photoPost.dateString;
-
     return cell;
 }
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.arrayOfPhotoObjects.count;
-//}
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
-//
-//    // need to retrieve photos...
-//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
-//    {
-//        cell.photo.image = photo;
-//    }];
-//
-//    //UserName
-//    [photoPost usernameWithCompletionBlock:^(NSString *username)
-//    {
-//        cell.userNameLabel.text = username;
-//    }];
-//
-//    //PhotoCaption
-//    cell.photoCaptionTextView.text = photoPost.caption;
-//
-//    //TimeLabel
-//    cell.dateLabel.text = photoPost.dateString;
-//
-//    return cell;
-//
-//}
 
 -(void)viewDidAppear:(BOOL)animated
 {
