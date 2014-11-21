@@ -70,6 +70,12 @@
     return self.photosArray.count;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return CGSizeMake(width, width);
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = self.photosArray[indexPath.item];
