@@ -231,10 +231,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="doA-Ot-qqN">
-                                <rect key="frame" x="0.0" y="345" width="320" height="223"/>
+                                <rect key="frame" x="0.0" y="394" width="320" height="174"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="223" id="OZh-AD-gdG"/>
+                                    <constraint firstAttribute="height" constant="174" id="OZh-AD-gdG"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="6Vw-J2-hbf" detailTextLabel="zPb-Qz-L10" style="IBUITableViewCellStyleSubtitle" id="lnI-uq-Y95">
@@ -825,7 +825,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bn3-Kc-gc4" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Main Feed" image="photo" id="W4j-p9-8Dt"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O1t-YO-7cC">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="O1t-YO-7cC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -846,7 +847,8 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vt7-AE-MsC">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="vt7-AE-MsC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -865,7 +867,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4VM-05-Zyu" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="dSV-XO-dVv"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d4m-fX-bbE">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="d4m-fX-bbE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -884,7 +887,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3ol-RJ-XcS" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorites" image="heart-7" id="NiM-bJ-L0D"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pI8-kV-XGi">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="pI8-kV-XGi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
