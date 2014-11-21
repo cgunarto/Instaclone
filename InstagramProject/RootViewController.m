@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property NSArray *arrayOfPhotoObjects;
+@property NSMutableArray *allPhotoArray;
 
 
 @end
@@ -31,22 +32,40 @@
     [super viewDidLoad];
 }
 
+#pragma mark Collection View Method
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.arrayOfPhotoObjects.count;
+//    return self.arrayOfPhotoObjects.count;
+    return self.allPhotoArray.count;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    return CGSizeMake(width, width);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
+    Photo *photoPost = self.allPhotoArray[indexPath.row];
 
     // need to retrieve photos...
-    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
-     {
-         cell.imageView.image = photo;
-     }];
+    [photoPost.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        if (!error)
+        {
+            cell.imageView.image = [UIImage imageWithData:data];
+        }
+    }];
+
+//
+//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
+//     {
+//         cell.imageView.image = photo;
+//     }];
 
 //    //UserName
 //    [photoPost usernameWithCompletionBlock:^(NSString *username)
@@ -147,17 +166,51 @@
 
 - (void)downloadAllImages
 {
+    self.allPhotoArray =[@[]mutableCopy];
+    //Getting my own photos
     PFQuery *query = [PFQuery queryWithClassName:[Photo parseClassName]];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"user" equalTo:[Instaclone currentProfile]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+    {
         if (error)
         {
             NSLog(@"Error: %@",error);
-        }else
+        }
+        else
         {
-            self.arrayOfPhotoObjects = objects;
-            [self.collectionView reloadData];
+            for (Photo *photo in objects)
+            {
+                [self.allPhotoArray addObject:photo];
+            }
+
+            NSArray *followingArray = [Instaclone currentProfile].following;
+
+            for (Profile *following in followingArray)
+             {
+                 PFQuery *query = [PFQuery queryWithClassName:[Photo parseClassName]];
+                 [query orderByDescending:@"createdAt"];
+                 [query whereKey:@"user" equalTo:following];
+
+                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+                  {
+                      if (error)
+                      {
+                          NSLog(@"Error: %@",error);
+                      }
+                      else
+                      {
+                          for (Photo *photo in objects)
+                          {
+                              [self.allPhotoArray addObject:photo];
+                          }
+
+                          [self.collectionView reloadData];
+                      }
+                  }];
+             }
+
         }
     }];
 
