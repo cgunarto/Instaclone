@@ -14,7 +14,7 @@
 #import <Social/Social.h>
 
 @interface FavoritePhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-@property NSArray *photos;
+@property NSMutableArray *photos;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"ViewDidLoad called");
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -39,7 +40,7 @@
     {
         if (!error)
         {
-            self.photos = objects;
+            [self.photos addObjectsFromArray:objects];
 
             //reload the collectionViewCell if there is a photo -- this will crash if it wasn't here
             if (self.photos.count > 0)
@@ -49,6 +50,15 @@
         }
 
     }];
+    NSLog(@"View did appear called");
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.photos = [@[]mutableCopy];
+    [self.collectionView reloadData];
 }
 
 #pragma mark Collection View Cell Methods
@@ -97,7 +107,7 @@
     [query whereKey:@"usersWhoFavorited" equalTo:[Instaclone currentProfile]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
      {
-         self.photos = objects;
+         [self.photos addObjectsFromArray:objects];
          [self.collectionView reloadData];
      }];
 }
