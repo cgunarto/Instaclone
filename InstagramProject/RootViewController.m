@@ -160,6 +160,7 @@
 }
 
 
+
 - (void)downloadAllImages:(UIRefreshControl *)refreshControl;
 {
     self.allPhotoArray =[@[]mutableCopy];

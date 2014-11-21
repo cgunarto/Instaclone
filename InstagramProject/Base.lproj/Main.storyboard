@@ -633,6 +633,7 @@
                     <navigationItem key="navigationItem" id="t5t-gu-bmW"/>
                     <connections>
                         <outlet property="collectionView" destination="nOc-O2-yKj" id="iju-rP-GUN"/>
+                        <outlet property="searchBar" destination="49m-wR-Kq4" id="I7w-pv-kH2"/>
                         <segue destination="xQ6-au-s8G" kind="push" identifier="segueToPhotoDetail" id="orQ-dL-3F6"/>
                     </connections>
                 </viewController>

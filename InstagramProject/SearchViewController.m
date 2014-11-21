@@ -14,6 +14,7 @@
 @interface SearchViewController ()<UICollectionViewDataSource, UICollectionViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *photosArray;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -22,6 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.searchBar.showsCancelButton = YES;
 }
 
 //Query all the photos with some tag associated to it
@@ -47,7 +50,12 @@
 
     }];
 
-    [self resignFirstResponder];
+    [searchBar resignFirstResponder];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 
 #pragma mark Collection View Cell Delegate Method
@@ -81,6 +89,5 @@
     PhotoDetailViewController *photoDetailVC = segue.destinationViewController;
     photoDetailVC.selectedPhoto = photo;
 }
-
 
 @end
