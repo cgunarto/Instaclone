@@ -114,6 +114,24 @@
     return CGSizeMake(width, width);
 }
 
+//- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
+//{
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Edit Photo" message:@"Edit Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+//                                                           style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction * action)
+//                                   {
+//                                       [alert dismissViewControllerAnimated:YES completion:nil];
+//
+//                                   }];
+//
+//    [alert addAction:cancelButton];
+//    [self presentViewController:alert
+//                       animated:YES
+//                     completion:nil];
+//}
+
 
 
 @end
