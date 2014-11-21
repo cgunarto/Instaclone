@@ -318,7 +318,7 @@
                                     <action selector="onFollowButtonPressed:" destination="xQ6-au-s8G" eventType="touchUpInside" id="Vxp-Ol-PoW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwi-lg-mPE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwi-lg-mPE">
                                 <rect key="frame" x="126" y="456" width="68" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="68" id="RSP-eR-wsO"/>
@@ -338,6 +338,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="fnK-md-Dz2" secondAttribute="trailing" constant="-16" id="2HY-T7-kdw"/>
                             <constraint firstItem="LFP-2P-eD4" firstAttribute="leading" secondItem="idz-LL-PtC" secondAttribute="leadingMargin" constant="19" id="4Z9-Ji-1wV"/>
                             <constraint firstItem="Icl-ms-sMI" firstAttribute="top" secondItem="LFP-2P-eD4" secondAttribute="bottom" constant="2" id="8Da-fK-Ade"/>
+                            <constraint firstItem="lwi-lg-mPE" firstAttribute="top" secondItem="fnK-md-Dz2" secondAttribute="bottom" constant="1" id="94k-fW-KEO"/>
                             <constraint firstItem="4nu-h7-Qzc" firstAttribute="top" secondItem="dpj-qv-UmN" secondAttribute="bottom" constant="2" id="AEi-RQ-pRQ"/>
                             <constraint firstItem="QiK-Qg-fgj" firstAttribute="leading" secondItem="idz-LL-PtC" secondAttribute="leadingMargin" constant="-6" id="GFZ-Rk-M7H"/>
                             <constraint firstItem="doA-Ot-qqN" firstAttribute="bottom" secondItem="idz-LL-PtC" secondAttribute="bottomMargin" id="J0J-9i-BrR"/>
