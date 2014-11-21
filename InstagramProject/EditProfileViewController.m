@@ -41,6 +41,7 @@
     self.nameTextField.text = [Instaclone currentProfile].name;
     self.usernameTextfield.text = [Instaclone currentProfile].username;
     self.emailTextField.text = [Instaclone currentProfile].email;
+    self.profileImageView.image = [UIImage imageNamed:@"face"];
 
     [[Instaclone currentProfile].profilePhoto getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
     {
@@ -49,6 +50,8 @@
             UIImage *image = [UIImage imageWithData:data];
             self.profileImageView.image = image;
         }
+
+
     }];
 }
 

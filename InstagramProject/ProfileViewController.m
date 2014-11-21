@@ -39,6 +39,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.profileImageView.image = [UIImage imageNamed:@"face"];
+
 
     //Looking for all the photos with [Instaclone currentProfile] in the user row
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
@@ -66,6 +68,7 @@
         {
             UIImage *image = [UIImage imageWithData:data];
             self.profileImageView.image = image;
+
         }
     }];
 
@@ -113,6 +116,24 @@
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     return CGSizeMake(width, width);
 }
+
+//- (IBAction)onImageTapped:(UITapGestureRecognizer *)sender
+//{
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Edit Photo" message:@"Edit Photo?" preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+//                                                           style:UIAlertActionStyleDefault
+//                                                         handler:^(UIAlertAction * action)
+//                                   {
+//                                       [alert dismissViewControllerAnimated:YES completion:nil];
+//
+//                                   }];
+//
+//    [alert addAction:cancelButton];
+//    [self presentViewController:alert
+//                       animated:YES
+//                     completion:nil];
+//}
 
 
 
