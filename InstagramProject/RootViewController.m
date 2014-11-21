@@ -168,6 +168,7 @@
 - (IBAction)onLogoutButtonPressed:(id)sender
 {
     [PFUser logOut];
+    [self viewDidAppear:YES];
 }
 
 

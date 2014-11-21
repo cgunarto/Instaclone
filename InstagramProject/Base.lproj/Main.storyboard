@@ -64,7 +64,13 @@
                             <constraint firstItem="LAc-3E-6VO" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="qZa-QA-xdN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="FdU-5F-wIf"/>
+                    <navigationItem key="navigationItem" id="FdU-5F-wIf">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="blI-h9-huG">
+                            <connections>
+                                <action selector="onLogoutButtonPressed:" destination="vXZ-lx-hvc" id="KtZ-oE-1jh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="LAc-3E-6VO" id="wug-wd-E2p"/>
                     </connections>
