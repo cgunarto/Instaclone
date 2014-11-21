@@ -100,7 +100,7 @@
     {
         [UIView animateWithDuration:0.7
                          animations:^{
-                             cell.heartImageView.image = [UIImage imageNamed:@"heart_full"];
+                             cell.heartImageView.image = [UIImage imageNamed:@"solid_gray_heart"];
                              cell.heartImageView.alpha =1.0f;
                              cell.heartImageView.alpha =0.0f;
                          }];
