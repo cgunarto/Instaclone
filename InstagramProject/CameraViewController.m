@@ -10,14 +10,17 @@
 #import <Parse/Parse.h>
 #import "Photo.h"
 #import "Instaclone.h"
+#import "RootViewController.h"
+#import "PhotoDetailViewController.h"
 
-@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate>
+@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property BOOL canTakePhoto;
 @property (weak, nonatomic) IBOutlet UITextField *tagTextField;
+@property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 
 
 
@@ -36,6 +39,7 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.delegate = self;
+    self.uploadButton.enabled = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -49,6 +53,18 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+
+    if([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        return NO;
+    }
 
     return YES;
 }
@@ -116,12 +132,21 @@
     }
 }
 
+// not working...
+//- (void)showMainfeedVC
+//{
+//    RootViewController *mainVC = [self.storyboard instantiateViewControllerWithIdentifier: NSStringFromClass([RootViewController class])];
+//
+//    [self.navigationController popToViewController:mainVC animated:YES];
+//}
+
 
 //MARK: IBAction Method
 
 - (IBAction)onUploadImageButtonPressed:(id)sender
 {
     [self uploadImage];
+    self.uploadButton.enabled = NO;
 }
 
 //MARK: Imagepicker delegate method

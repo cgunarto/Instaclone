@@ -18,25 +18,66 @@
 
 @interface RootViewController ()<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
+@property (strong, nonatomic) IBOutlet UIImageView *heartImage;
 
 @property NSArray *arrayOfPhotoObjects;
 @property NSMutableArray *allPhotoArray;
+
+@property UIRefreshControl *refreshControl;
 
 
 @end
 
 @implementation RootViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.collectionView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    //Setup required taps
+    [self.tapGesture setNumberOfTapsRequired:2];
+    [self.tapGesture setNumberOfTouchesRequired:1];
+
+    UIRefreshControl *refeshControl = [[UIRefreshControl alloc] init];
+    [refeshControl addTarget:self action:@selector(downloadAllImages:) forControlEvents:UIControlEventValueChanged];
+
+    [self.collectionView addSubview:refeshControl];
 }
+
+- (IBAction)onTapToAddToFavoritePhoto:(UITapGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint point = [tapGesture locationInView:self.collectionView];
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+
+        if (indexPath)
+        {
+            Photo *photoToFavorites = self.allPhotoArray[indexPath.item];
+
+            [photoToFavorites addObject:[Instaclone currentProfile] forKey:@"usersWhoFavorited"];
+            [photoToFavorites save];
+
+            [self.collectionView reloadData];
+            photoToFavorites.isFavorited = YES;
+        }
+    }
+}
+
+
+
 
 #pragma mark Collection View Method
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    return self.arrayOfPhotoObjects.count;
     return self.allPhotoArray.count;
 }
 
@@ -49,8 +90,17 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MainFeedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
     Photo *photoPost = self.allPhotoArray[indexPath.row];
+
+    if (photoPost.isFavorited)
+    {
+        [UIView animateWithDuration:0.7
+                         animations:^{
+                             cell.heartImageView.image = [UIImage imageNamed:@"heart_full"];
+                             cell.heartImageView.alpha =1.0f;
+                             cell.heartImageView.alpha =0.0f;
+                         }];
+    }
 
     // need to retrieve photos...
     [photoPost.photoFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
@@ -61,63 +111,11 @@
         }
     }];
 
-//
-//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
-//     {
-//         cell.imageView.image = photo;
-//     }];
-
-//    //UserName
-//    [photoPost usernameWithCompletionBlock:^(NSString *username)
-//     {
-//         cell.userNameLabel.text = username;
-//     }];
-//
-//    //PhotoCaption
-//    cell.photoCaptionTextView.text = photoPost.caption;
-//
-//    //TimeLabel
-//    cell.dateLabel.text = photoPost.dateString;
-
     return cell;
 }
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.arrayOfPhotoObjects.count;
-//}
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    MainfeedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-//    Photo *photoPost = self.arrayOfPhotoObjects[indexPath.row];
-//
-//    // need to retrieve photos...
-//    [photoPost standardImageWithCompletionBlock:^(UIImage *photo)
-//    {
-//        cell.photo.image = photo;
-//    }];
-//
-//    //UserName
-//    [photoPost usernameWithCompletionBlock:^(NSString *username)
-//    {
-//        cell.userNameLabel.text = username;
-//    }];
-//
-//    //PhotoCaption
-//    cell.photoCaptionTextView.text = photoPost.caption;
-//
-//    //TimeLabel
-//    cell.dateLabel.text = photoPost.dateString;
-//
-//    return cell;
-//
-//}
-
--(void)viewDidAppear:(BOOL)animated
+-(void)manageLogin
 {
-    [super viewDidAppear:animated];
-
     if (![PFUser currentUser]) {
 
         //Create the log in view controller
@@ -150,21 +148,31 @@
         [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object) {
                 clone.profile = (Profile *)object;
-                [self downloadAllImages];
+                [self downloadAllImages:self.refreshControl];
             }
         }];
-
+        
     }
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 
+    [self manageLogin];
 }
 
 - (IBAction)onLogoutButtonPressed:(id)sender
 {
     [PFUser logOut];
+    
+    [self.allPhotoArray removeAllObjects];
+    [self.collectionView reloadData];
+    [self manageLogin];
 }
 
 
-- (void)downloadAllImages
+
+- (void)downloadAllImages:(UIRefreshControl *)refreshControl;
 {
     self.allPhotoArray =[@[]mutableCopy];
     //Getting my own photos
@@ -177,6 +185,7 @@
         if (error)
         {
             NSLog(@"Error: %@",error);
+            [refreshControl endRefreshing];
         }
         else
         {
@@ -207,6 +216,7 @@
                           }
 
                           [self.collectionView reloadData];
+                          [refreshControl endRefreshing];
                       }
                   }];
              }

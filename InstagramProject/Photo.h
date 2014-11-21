@@ -27,6 +27,8 @@ typedef void (^PhotoResultBlock)(Photo *photo, NSError *error);
 @property NSString *tag;
 @property NSMutableArray *usersWhoFavorited;
 
+@property BOOL isFavorited;
+
 
 -(void)standardImageWithCompletionBlock:(void(^)(UIImage *))completionBlock;
 -(void)usernameWithCompletionBlock:(void(^)(NSString *username))completionBlock;
