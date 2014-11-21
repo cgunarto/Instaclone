@@ -76,9 +76,11 @@
         self.postLabel.text = [NSString stringWithFormat:@"%d Posts", number];
     }];
 
-    self.followersButton.titleLabel.text = [NSString stringWithFormat:@"%lu Followers",(unsigned long)[Instaclone currentProfile].followers.count];
+    NSString *stringForFollower = [NSString stringWithFormat:@"%lu Followers",(unsigned long)[Instaclone currentProfile].followers.count];
+    NSString *stringForFollowing = [NSString stringWithFormat:@"%lu Following",(unsigned long)[Instaclone currentProfile].following.count];
 
-    self.followingButton.titleLabel.text = [NSString stringWithFormat:@"%lu Following",(unsigned long)[Instaclone currentProfile].following.count];
+    [self.followersButton setTitle:stringForFollower forState:UIControlStateNormal];
+    [self.followingButton setTitle:stringForFollowing forState:UIControlStateNormal];
 
 }
 
