@@ -35,20 +35,24 @@
 {
     [super viewWillAppear:animated];
     [self.collectionView reloadData];
+
+    NSLog(@"viewwillappear called");
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    NSLog(@"viewdidload called");
+
     //Setup required taps
     [self.tapGesture setNumberOfTapsRequired:2];
     [self.tapGesture setNumberOfTouchesRequired:1];
 
-    UIRefreshControl *refeshControl = [[UIRefreshControl alloc] init];
-    [refeshControl addTarget:self action:@selector(downloadAllImages:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(downloadAllImages:) forControlEvents:UIControlEventValueChanged];
 
-    [self.collectionView addSubview:refeshControl];
+    [self.collectionView addSubview:self.refreshControl];
 }
 
 - (IBAction)onTapToAddToFavoritePhoto:(UITapGestureRecognizer *)tapGesture
@@ -182,9 +186,11 @@
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
     {
+
+
         if (error)
         {
-            NSLog(@"Error: %@",error);
+            NSLog(@"\n\nError: %@",error);
             [refreshControl endRefreshing];
         }
         else
@@ -195,6 +201,12 @@
             }
 
             NSArray *followingArray = [Instaclone currentProfile].following;
+
+            if (followingArray.count == 0)
+            {
+                [refreshControl endRefreshing];
+                return;
+            }
 
             for (Profile *following in followingArray)
              {
@@ -210,19 +222,24 @@
                       }
                       else
                       {
+                                 NSLog(@"\n\nxxxxxxxxobjecx2 %@%@", objects, error);
+
                           for (Photo *photo in objects)
                           {
                               [self.allPhotoArray addObject:photo];
                           }
 
                           [self.collectionView reloadData];
-                          [refreshControl endRefreshing];
+
                       }
+
+                       [refreshControl endRefreshing];
                   }];
              }
 
         }
     }];
+
 
 }
 
