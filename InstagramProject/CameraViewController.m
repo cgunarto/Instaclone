@@ -11,7 +11,7 @@
 #import "Photo.h"
 #import "Instaclone.h"
 
-@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate>
+@interface CameraViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property UIImagePickerController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -49,6 +49,18 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+
+    if([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        return NO;
+    }
 
     return YES;
 }
@@ -122,6 +134,7 @@
 - (IBAction)onUploadImageButtonPressed:(id)sender
 {
     [self uploadImage];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //MARK: Imagepicker delegate method
