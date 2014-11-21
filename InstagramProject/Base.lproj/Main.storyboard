@@ -179,7 +179,7 @@
                                     <action selector="onUploadImageButtonPressed:" destination="utT-Jk-C8Q" eventType="touchUpInside" id="zFJ-Sn-H4h"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqO-fU-ezi">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter tags here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqO-fU-ezi">
                                 <rect key="frame" x="0.0" y="400" width="320" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -187,7 +187,7 @@
                                     <outlet property="delegate" destination="utT-Jk-C8Q" id="6f1-Kk-Svc"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="CAPTION" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-TH-WSu">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter caption here" translatesAutoresizingMaskIntoConstraints="NO" id="z1R-TH-WSu">
                                 <rect key="frame" x="0.0" y="319" width="320" height="73"/>
                                 <color key="backgroundColor" red="0.74434946424944803" green="1" blue="0.98689564038053901" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

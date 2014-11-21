@@ -39,6 +39,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.profileImageView.image = [UIImage imageNamed:@"face"];
+
 
     //Looking for all the photos with [Instaclone currentProfile] in the user row
     PFQuery *query = [PFQuery queryWithClassName:@"Photo"];
@@ -66,6 +68,7 @@
         {
             UIImage *image = [UIImage imageWithData:data];
             self.profileImageView.image = image;
+
         }
     }];
 
