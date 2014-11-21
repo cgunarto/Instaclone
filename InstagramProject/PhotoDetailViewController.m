@@ -85,7 +85,6 @@
     Profile *profile = self.selectedPhoto.user;
     PFQuery *query = [Profile query];
     [query whereKey:@"objectId" equalTo:profile.objectId];
-    [query includeKey:@"following"];
 
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
 
